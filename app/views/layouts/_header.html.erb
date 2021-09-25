@@ -1,0 +1,78 @@
+
+<style>
+@media only screen and (max-width: 768px) {
+    .dropbtn {
+        padding: 10px 15px;
+  }
+}
+
+</style>
+
+
+<header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <%= link_to "sample app", root_path, id: "logo" %>
+        <nav>
+            <ul class="nav navbar-nav navbar-right">
+                    <li style= "color: #9D9D9D;"><%= link_to "Home", root_path %></li>
+                    <li><%= link_to "Help", help_path %></li>
+                    <% if logged_in? %>
+                    <li><%= link_to "Users", users_path %></li>
+                        <button onclick="myFunction()" class="dropbtn">Account</button>
+                        <ul id="AccountDrop" class="dropdown-content">
+                            <%= link_to "Profile", current_user %>
+                            <%= link_to "Settings", edit_user_path(current_user) %>
+                            <%= link_to "Log Out", logout_path, method:"delete" %>
+                        </ul>
+                    <% else %>
+                        <li><%= link_to "Log In", login_path %></li>
+                    <% end %>
+                
+            </ul>
+        </nav>
+    </div>
+</header>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("AccountDrop").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
