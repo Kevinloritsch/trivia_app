@@ -10,4 +10,7 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+  def trivia_form
+    @message = "hello how are you"
+  end
 end
