@@ -1,0 +1,2 @@
+module TriviaFormHelper
+end

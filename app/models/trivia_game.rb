@@ -1,0 +1,2 @@
+class TriviaGame < ApplicationRecord
+end
