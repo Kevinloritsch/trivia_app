@@ -6,26 +6,28 @@
   }
 }
 
+.navbar-inverse {
+  background-clor: #7537FD;
+
+}
+
 </style>
 
 
-<header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-        <%= link_to "sample app", root_path, id: "logo" %>
+<header class="navbar navbar-fixed-top navbar-inverse" style="background-color: #04346E; height: 110px">
+    <div class="container" style="background-color: #04346E; padding-top: 10px; padding-bottom: 10px;">
+        <%= link_to image_tag("logo.png", alt: "Neato Trivia", width: "200"), root_path, id: "logo"  %>
         <nav>
-            <ul class="nav navbar-nav navbar-right">
-                    <li style= "color: #9D9D9D;"><%= link_to "Home", root_path %></li>
-                    <li><%= link_to "Help", help_path %></li>
+            <ul class="nav navbar-nav navbar-right navbar-custom">
+                    <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Home", root_path %></li>
+                    <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Help", help_path %></li>
                     <% if logged_in? %>
-                    <li><%= link_to "Users", users_path %></li>
-                        <button onclick="myFunction()" class="dropbtn">Account</button>
-                        <ul id="AccountDrop" class="dropdown-content">
-                            <%= link_to "Profile", current_user %>
-                            <%= link_to "Settings", edit_user_path(current_user) %>
-                            <%= link_to "Log Out", logout_path, method:"delete" %>
-                        </ul>
+                      <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Profile", current_user %></li>
+                      <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Settings", edit_user_path(current_user) %></li>
+                      <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Log Out", logout_path, method:"delete" %></li>
+
                     <% else %>
-                        <li><%= link_to "Log In", login_path %></li>
+                    <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Log In", login_path %></li>
                     <% end %>
                 
             </ul>

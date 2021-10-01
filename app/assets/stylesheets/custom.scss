@@ -11,6 +11,7 @@ $light-gray: #777;
 
 body {
     padding-top: 150px;
+    background-image:url('trivia.jpg');
 }
 
 section {
@@ -123,6 +124,16 @@ h1, h2, h3, h4, h5, h6 {
         margin-top:45px;
         @include box_sizing;
     }
+
+    
+    /* Modify brand and text color */
+     
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-inverse {
+        color: #04346E;
+    }
+
+
 
 
 
