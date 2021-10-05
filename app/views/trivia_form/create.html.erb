@@ -1,36 +1,125 @@
+<script>
+  var counter = 0;
+  var frq_counter = 0;
+  function create_mutiplechoice() {
+    counter++;
+    var mutiple_choice = document.createElement("div");
+    mutiple_choice.id = `mutiplechoice${counter}`;
+    mutiple_choice.innerHTML = `
+  <div class="row">
+    <div class="col-md-12">
+      <label>Question</label>
+      <input type="text" class="form-control" placeholder="Question">
+    </div>
+    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>A.</label>
+          <input type="text" class="form-control" placeholder="A.">
+        </div>
+        <div class="col-md-6">
+          <label>B.</label>
+          <input type="text" class="form-control" placeholder="B.">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>C.</label>
+          <input type="text" class="form-control" placeholder="C.">
+        </div>
+        <div class="col-md-6">
+          <label>D.</label>
+          <input type="text" class="form-control" placeholder="D.">
+        </div>
+      </div>
+    `
+    var row = document.getElementById("questionsrow");
+    row.appendChild(mutiple_choice);
+  }
+  function create_frq(){
+    var frq = document.createElement("div");
+    frq.id = `frq${frq_counter}`
+    frq.innerHTML = 
+    `
+    <div class="row">
+      <div class="col-md-6">
+        <label>Question</label>
+        <input type="text" class="form-control" placeholder="Question">
+      </div>
+      <div class="col-md-6">
+        <label>Answer</label>
+        <input type="text" class="form-control" placeholder="Answer">
+      </div>
+    </div>`;
+    var row = document.getElementById("questionsrow");
+    row.appendChild(frq);
+  }
+</script>
 <div class="center jumbotron">
 
 <h1>Create New Trivia Game</h1>
 <form>
 <div class="container">
+  <div class="row">
+      <div class="col-md-1 col-md-offset-11">
+      <div class="dropdown">
+      <button class="dropbtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+      </svg>
+    </button>
+      <div class="dropdown-content">
+        <a href="javascript:void(0);" onclick="create_mutiplechoice()">Add Mutiple Choice</a>
+        <a href="javascript:void(0);" onclick="create_frq()">Add FRQ</a>
+      </div>
+      </div>
+      </div>
+  </div>
+</div>
+<div class="container" id="questionsrow">
+<div id="mutiplechoice0">
+  <div class="row">
+    <div class="col-md-12">
+      <label>Question</label>
+      <input type="text" class="form-control" placeholder="Question">
+    </div>
+    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>A.</label>
+          <input type="text" class="form-control" placeholder="A.">
+        </div>
+        <div class="col-md-6">
+          <label>B.</label>
+          <input type="text" class="form-control" placeholder="B.">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>C.</label>
+          <input type="text" class="form-control" placeholder="C.">
+        </div>
+        <div class="col-md-6">
+          <label>D.</label>
+          <input type="text" class="form-control" placeholder="D.">
+        </div>
+      </div>
+  </div>
+  <div id="frq0" style="display:none">
+    <div class="row">
+      <div class="col-md-6">
+        <label>Question</label>
+        <input type="text" class="form-control" placeholder="Question">
+      </div>
+      <div class="col-md-6">
+        <label>Answer</label>
+        <input type="text" class="form-control" placeholder="Answer">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
 <div class="row">
-<div class="col-md-12">
-  <label>Question</label>
-  <input type="text" class="form-control" placeholder="Question">
-</div>
-</div>
-  <div class="row">
-    <div class="col-md-6">
-      <label>A.</label>
-      <input type="text" class="form-control" placeholder="A.">
-    </div>
-    <div class="col-md-6">
-      <label>B.</label>
-      <input type="text" class="form-control" placeholder="B.">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <label>C.</label>
-      <input type="text" class="form-control" placeholder="C.">
-    </div>
-    <div class="col-md-6">
-      <label>D.</label>
-      <input type="text" class="form-control" placeholder="D.">
-    </div>
-  </div>
-  <hr>
-  <div class="row">
     <div class="col-md-1 col-md-offset-11">
       <a href="#" class="btn btn-info">Submit</a>
     </div>
