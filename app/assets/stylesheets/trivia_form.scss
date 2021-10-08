@@ -40,3 +40,29 @@
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #c8d1c8;}
   
+  .myBox {
+    border: none;
+    padding: 5px;
+    height: 233px;
+    overflow-y: scroll;
+    }
+    
+    /* Scrollbar styles */
+    ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    }
+    
+    ::-webkit-scrollbar-track {
+    border: 1px solid rgb(114, 138, 138);
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    background: rgb(170, 206, 229);  
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+    background: #abebdd;  
+    }
