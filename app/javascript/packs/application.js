@@ -8,7 +8,7 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
-//= require custom
+//= require trivia_form
 
 
 import Rails from "@rails/ujs"
