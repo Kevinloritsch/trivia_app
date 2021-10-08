@@ -8,6 +8,7 @@
 <%= render 'layouts/shim' %>
 
 <%= favicon_link_tag asset_path('favicon.ico') %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
 
 
@@ -15,8 +16,7 @@
 <%= render 'layouts/header' %>
 
 <body>
-<div class="container">
-
+<div class="container grad1">
    <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
     <% end %>
