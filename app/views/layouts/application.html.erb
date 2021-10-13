@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
 <title><%= full_title(yield(:title)) %></title>
 
 <%= render 'layouts/rails_default' %>
 <%= render 'layouts/shim' %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
 <%= favicon_link_tag asset_path('favicon.ico') %>
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -29,7 +30,7 @@
 <%= yield %>
 
 <script type="text/javascript">
-        $(window).on("load",function(){
+  $( window ).on("load", function() {
           $(".loader-wrapper").fadeOut(1200);
         });
   </script>
