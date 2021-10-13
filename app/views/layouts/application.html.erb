@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
 <title><%= full_title(yield(:title)) %></title>
 
@@ -10,17 +12,27 @@
 <%= favicon_link_tag asset_path('favicon.ico') %>
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
-
-
 </head>
 <%= render 'layouts/header' %>
 
+
 <body>
+
+<div class="loader-wrapper">
+  <div class="clipped"></div>
+    </div>
+
 <div class="container grad1">
    <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
     <% end %>
 <%= yield %>
+
+<script type="text/javascript">
+        $(window).on("load",function(){
+          $(".loader-wrapper").fadeOut(1200);
+        });
+  </script>
 
 <%= render 'layouts/footer' %>
 <%= debug(params) if Rails.env.development? %>
