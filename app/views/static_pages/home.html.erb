@@ -1,17 +1,70 @@
+<style>
+* {
+  box-sizing: border-box;
+}
 
-<div class="center jumbotron"">
-<h1>Welcome to Dr. Neat's Trivia App!</h1>
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 100%;
+}
 
-<p>&nbsp;</p>
-
-<h2>
-This is the home page for CV Enterprises Trivia application.
-</h2>
-<p>&nbsp;</p>
-
-<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-<p>&nbsp;</p>
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
 
 
-<%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/" %>
+<div class="row">
+  <div class="column" style="background-color:#aaa;">
+  <h1>Welcome to Dr. Neat's Trivia App!</h1>
+
+  <p>&nbsp;</p>
+
+  <h2>
+  This is the home page for CV Enterprises Trivia application.
+  </h2>
+  <p>&nbsp;</p>
+
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <p>&nbsp;</p>
+
+
+  <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/" %>
+  </div>
+
+
+
+  <div class="column" style="background-color:#bbb;">
+  <svg width="20cm" height="16cm" viewBox="0 0 1600 800"
+  xmlns="http://www.w3.org/2000/svg" version="1.1">
+
+<style type="text/css"><![CDATA[
+  .Border { fill:none;}
+  .Connect { fill:none; stroke:#888888; stroke-width:2 }
+  .SamplePath { fill:none; stroke:red; stroke-width:5 }
+
+]]></style>
+
+
+<path class="SamplePath" d="M200,300 L200,100 Q500,100 500,400"\
+transform="translate(400,0)"/>
+<path class="SamplePath" d="M200,100 Q500,100 500,400"
+  transform="translate(1000,200) rotate(90)"/>
+<path class="SamplePath" d="M200,700 L200,900"
+transform="translate(400,0)"/>
+
+
+
+</svg>
+  </div>
+</div>
+
+
+
 </div>
