@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/create', to: 'trivia_form#create'
+  post'/submit', to: 'trivia_form#submit'
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
