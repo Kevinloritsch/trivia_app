@@ -26,15 +26,29 @@ class TriviaFormController < ApplicationController
         count = count +1
       end
     end
+    def get_questions(inputs)
+      questions = ""
+      for input in inputs
+        if(input.to_s.include?("question"))
+          questions = questions + input.to_s + "/";
+        end
+      end
+      return questions
+    end
+    def get_answers(inputs)
+      answers = ""
+      for input in inputs
+        if(input.to_s.include?("answer"))
+          answers = answers+"/" + input.to_s;
+        end
+      end
+      return answers
+    end
     @inputs = params
     @mutiple_choice_length = get_length_mutiple_choice(@inputs)
     @frq_length = get_length_frq(@inputs)
-    question = ""
-    for input in inputs
-      if(input.includes?("question"))
-        question = question + input + "/"+ inputs[input]+ "/";
-      end
-    end
-    
+    @questions = get_questions(@inputs);
+    @answers = get_answers(@inputs);
+    TriviaGame.create(:question => @questions, :answer => @answers);
   end
 end
