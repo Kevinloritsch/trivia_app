@@ -44,11 +44,27 @@ class TriviaFormController < ApplicationController
       end
       return answers
     end
+    def validate(inputs)
+      for input in inputs
+        for ins in input
+          if(ins.to_s.blank?)
+            return false;
+            break;
+          end
+        end
+      end
+      return true;
+    end
     @inputs = params
-    @mutiple_choice_length = get_length_mutiple_choice(@inputs)
-    @frq_length = get_length_frq(@inputs)
-    @questions = get_questions(@inputs);
-    @answers = get_answers(@inputs);
-    TriviaGame.create(:question => @questions, :answer => @answers);
+    @validate = "default"
+    if(validate(@inputs))
+      @validate = "Inputs did validate"
+      @questions = get_questions(@inputs);
+      @answers = get_answers(@inputs);
+      # TriviaGame.create(:question => @questions, :answer => @answers);
+    else
+      @validate = "Inputs didn't validate"
+      redirect_back(fallback_location: root_path)
+    end
   end
 end
