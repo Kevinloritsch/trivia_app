@@ -63,7 +63,7 @@ class TriviaFormController < ApplicationController
       @answers = get_answers(@inputs);
       # TriviaGame.create(:question => @questions, :answer => @answers);
     else
-      @validate = "Inputs didn't validate"
+      flash[:danger] = "Form field not filled out"
       redirect_back(fallback_location: root_path)
     end
   end
