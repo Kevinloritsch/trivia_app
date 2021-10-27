@@ -1,6 +1,7 @@
 <script>
 var counter = 0;
   var frq_counter = 0;
+  var click = true;
   function create_mutiplechoice() {
     counter++;
     var mutiple_choice = document.createElement("div");
@@ -27,21 +28,21 @@ var counter = 0;
     </div>
     </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
           <label>A.</label>
           <input name="answera${counter}" type="text" class="form-control" placeholder="A.">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
           <label>B.</label>
           <input name="answerb${counter}" type="text" class="form-control" placeholder="B.">
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
           <label>C.</label>
           <input name="answerc${counter}" type="text" class="form-control" placeholder="C.">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
           <label>D.</label>
           <input name="answerd${counter}" type="text" class="form-control" placeholder="D.">
         </div>
@@ -90,6 +91,21 @@ var counter = 0;
     }
     parent.remove();
   }
+  function highlight(node){
+    if(!(node.getAttribute("class").includes("has-success")))
+    node.childNodes[3].disabled = false;
+    node.setAttribute("class", node.getAttribute("class")+" form-group has-success")
+  }
+  function unhighlight(node){
+    if(click){
+      node.setAttribute("class", "col-md-6");
+      node.childNodes[3].disabled = true;
+    }
+  }
+  function correct(node){
+    node.setAttribute("class", node.getAttribute("class")+" form-group has-success")
+    click = !click
+  }
 </script>
 
 <div class="center jumbotron">
@@ -134,22 +150,22 @@ var counter = 0;
       <input name="question" type="text" class="form-control" placeholder="Question">
     </div>
     </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label>A.</label>
+      <div class="row form-group">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
+          <label class="control-label">A.</label>
           <input name="answera" type="text" class="form-control" placeholder="A.">
         </div>
-        <div class="col-md-6">
-          <label>B.</label>
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
+          <label class="control-label">B.</label>
           <input name="answerb" type="text" class="form-control" placeholder="B.">
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
           <label>C.</label>
           <input name="answerc" type="text" class="form-control" placeholder="C.">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
           <label>D.</label>
           <input name="answerd" type="text" class="form-control" placeholder="D.">
         </div>
