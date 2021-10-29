@@ -92,19 +92,11 @@ var counter = 0;
     parent.remove();
   }
   function highlight(node){
-    if(!(node.getAttribute("class").includes("has-success")))
-    node.childNodes[3].disabled = false;
-    node.setAttribute("class", node.getAttribute("class")+" form-group has-success")
-  }
-  function unhighlight(node){
-    if(click){
-      node.setAttribute("class", "col-md-6");
-      node.childNodes[3].disabled = true;
+    if(node.getAttribute("class").includes("success")){
+      node.setAttribute("class", "btn btn-default")
+    }else if(node.getAttribute("class").includes("default")){
+      node.setAttribute("class", "btn btn-success")
     }
-  }
-  function correct(node){
-    node.setAttribute("class", node.getAttribute("class")+" form-group has-success")
-    click = !click
   }
 </script>
 
@@ -150,27 +142,43 @@ var counter = 0;
       <input name="question" type="text" class="form-control" placeholder="Question">
     </div>
     </div>
-      <div class="row form-group">
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label class="control-label">A.</label>
-          <input name="answera" type="text" class="form-control" placeholder="A.">
-        </div>
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label class="control-label">B.</label>
-          <input name="answerb" type="text" class="form-control" placeholder="B.">
-        </div>
+    <div class="row" style="padding-bottom: 15px">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+        </span>
+        <input type="text" class="form-control" placeholder="A.">
       </div>
-      <div class="row">
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label>C.</label>
-          <input name="answerc" type="text" class="form-control" placeholder="C.">
-        </div>
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label>D.</label>
-          <input name="answerd" type="text" class="form-control" placeholder="D.">
-        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="B.">
+        <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+        </span>
       </div>
+    </div>
   </div>
+      <div class="row" style="padding-bottom: 15px">
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+      <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+      </span>
+      <input type="text" class="form-control" placeholder="C.">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="D.">
+      <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+</div>
   <div id="frq0" style="display:none">
     <div class="row">
       <div class="col-md-6">
