@@ -27,26 +27,43 @@ var counter = 0;
       <input name="question${counter}" type="text" class="form-control" placeholder="Question">
     </div>
     </div>
-      <div class="row">
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label>A.</label>
-          <input name="answera${counter}" type="text" class="form-control" placeholder="A.">
-        </div>
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label>B.</label>
-          <input name="answerb${counter}" type="text" class="form-control" placeholder="B.">
-        </div>
+    <div class="row" style="padding-bottom: 15px">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+        </span>
+        <input name="answera${counter}" type="text" class="form-control" placeholder="A.">
       </div>
-      <div class="row">
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label>C.</label>
-          <input name="answerc${counter}" type="text" class="form-control" placeholder="C.">
-        </div>
-        <div class="col-md-6" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="correct(this)">
-          <label>D.</label>
-          <input name="answerd${counter}" type="text" class="form-control" placeholder="D.">
-        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="B.">
+        <span class="input-group-btn">
+        <button name="answerb${counter}" class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+        </span>
       </div>
+    </div>
+  </div>
+      <div class="row" style="padding-bottom: 15px">
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+      <button name="answerc${counter}" class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+      </span>
+      <input type="text" class="form-control" placeholder="C.">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <input name="answerd${counter}" type="text" class="form-control" placeholder="D.">
+      <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+</div>
     `
     var row = document.getElementById("questionsrow");
     row.appendChild(mutiple_choice);
@@ -92,10 +109,12 @@ var counter = 0;
     parent.remove();
   }
   function highlight(node){
-    if(node.getAttribute("class").includes("success")){
+    if(node.getAttribute("class").includes("info")){
       node.setAttribute("class", "btn btn-default")
+      node.parentNode.parentNode.childNodes[1].setAttribute("type","0")
     }else if(node.getAttribute("class").includes("default")){
-      node.setAttribute("class", "btn btn-success")
+      node.setAttribute("class", "btn btn-info")
+      node.parentNode.parentNode.childNodes[1].setAttribute("type","1")
     }
   }
 </script>
@@ -139,23 +158,23 @@ var counter = 0;
   <div class="row">
     <div class="col-md-12">
       <label>Question</label>
-      <input name="question" type="text" class="form-control" placeholder="Question">
+      <input name="question0" type="text" class="form-control" placeholder="Question">
     </div>
     </div>
     <div class="row" style="padding-bottom: 15px">
     <div class="col-md-6">
       <div class="input-group">
         <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
         </span>
-        <input type="text" class="form-control" placeholder="A.">
+        <input name="answera0" type="text" class="form-control" placeholder="A.">
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="B.">
         <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+        <button name="answerb0" class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
         </span>
       </div>
     </div>
@@ -164,16 +183,16 @@ var counter = 0;
   <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-btn">
-      <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+      <button name="answerc0" class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
       </span>
       <input type="text" class="form-control" placeholder="C.">
     </div>
   </div>
   <div class="col-md-6">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="D.">
+      <input name="answerd0" type="text" class="form-control" placeholder="D.">
       <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" type="button">&nbsp&nbsp&nbsp</button>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
