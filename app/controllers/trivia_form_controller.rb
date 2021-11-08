@@ -2,17 +2,6 @@ class TriviaFormController < ApplicationController
   def trivia_form
   end
   def submit
-    # def validate(inputs)
-    #   for input in inputs
-    #     for ins in input
-    #       if(ins.to_s.blank?)
-    #         return false;
-    #         break;
-    #       end
-    #     end
-    #   end
-    #   return true;
-    # end
     @inputs = params
     answer = Array.new
     @everything = Array.new
@@ -30,15 +19,24 @@ class TriviaFormController < ApplicationController
         @everything.append(answer);
       end
     end
-        
-    # @validate = "default"
+    # def validate(inputs)
+    #   def is_blank(inputs)
+    #     for input in inputs
+    #       for ins in input
+    #         if(ins.to_s.blank?)
+    #           return false;
+    #           break;
+    #         end
+    #       end
+    #     end
+    #     return true;
+    #   end
+    # end
     # if(validate(@inputs))
-    #   @validate = "Inputs did validate"
-    #   @questions = get_questions(@inputs);
-    #   @answers = get_answers(@inputs);
-    #   # TriviaGame.create(:question => @questions, :answer => @answers);
+    #   TriviaGame.create(:data=>@everything.to_s)
     # else
     #   flash[:danger] = "Form field not filled out"
     #   redirect_back(fallback_location: root_path)
+    # end
   end
 end
