@@ -19,19 +19,29 @@ class TriviaFormController < ApplicationController
         @everything.append(answer);
       end
     end
-    # def validate(inputs)
-    #   def is_blank(inputs)
-    #     for input in inputs
-    #       for ins in input
-    #         if(ins.to_s.blank?)
-    #           return false;
-    #           break;
-    #         end
-    #       end
-    #     end
-    #     return true;
-    #   end
-    # end
+    def is_blank(array)
+      for index in 0..(array.length()-1)
+        counter = 0;
+        for input in array[index]
+          if(input != false && input.blank?)
+            return index;
+          end
+          counter = counter + 1;
+        end
+      end
+      return true;
+    end
+    @x = is_blank(@everything)
+    if(@x.class == Integer)
+      if(@x%5 == 0)
+        flash[:danger] = "Question " + ((@x/5)+1).to_s + " has not filled out!"
+      else
+        flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out"
+      end
+      redirect_back(fallback_location: root_path)
+    else
+      # TriviaGame.create(:data=>@everything.to_s)
+    end
     # if(validate(@inputs))
     #   TriviaGame.create(:data=>@everything.to_s)
     # else
