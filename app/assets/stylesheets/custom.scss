@@ -334,12 +334,34 @@ input, textarea, select, .uneditable-input {
 
 
   .svganimate {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: dash 3s infinite;
+    stroke-dasharray: 270;
+    stroke-dashoffset: 270;
+    animation: dash 6s infinite;
   }
   @keyframes dash {
     0%  {stroke-dashoffset: 0;}
-    50%  {stroke-dashoffset: 1000;}
+    50%  {stroke-dashoffset: 270;}
+    100%  {stroke-dashoffset: 0;}
+  }
+
+  .svganimate2 {
+    stroke-dasharray: 270;
+    stroke-dashoffset: 270;
+    animation: dash 6s infinite;
+  }
+  @keyframes dash2 {
+    0%  {stroke-dashoffset: 0;}
+    50%  {stroke-dashoffset: 270;}
+    100%  {stroke-dashoffset: 0;}
+  }
+
+  .svganimate3 {
+    stroke-dasharray: 270;
+    stroke-dashoffset: 270;
+    animation: dash 6s infinite;
+  }
+  @keyframes dash3 {
+    0%  {stroke-dashoffset: 0;}
+    50%  {stroke-dashoffset: 270;}
     100%  {stroke-dashoffset: 0;}
   }
