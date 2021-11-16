@@ -1,64 +1,46 @@
-<style>
-* {
-  box-sizing: border-box;
-}
+  <div class="body2">
+  <div class="welcome">
+  Welcome!
+  </div>
+  <svg viewBox="0 -140 1200 300">
 
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  height: 100%;
-}
+  <symbol id="s-text">
+    <text text-anchor="middle" x="50%" y="30%" dy=".3em">
+        Dr Neat's
+     </text>
+  </symbol>
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
+  <!-- Duplicate symbols -->
+  <use xlink:href="#s-text" class="text"></use>
+  <use xlink:href="#s-text" class="text"></use>
+  <use xlink:href="#s-text" class="text"></use>
+  <use xlink:href="#s-text" class="text"></use>
+  <use xlink:href="#s-text" class="text"></use>
+  </svg>
+  <svg viewBox="0 0 1500 300">
 
+  <symbol id="a-text2">
+  <text text-anchor="middle" x="50%" y="65%" dy=".3em" width="40%">
+      Trivia App
+   </text>
+</symbol>
 
-<div class="row">
-  <div class="column" style="background-color:#aaa;">
-  <h1>Welcome to Dr. Neat's Trivia App!</h1>
+<!-- Duplicate symbols -->
+<use xlink:href="#a-text2" class="text2" height:40%; width: 40%></use>
+<use xlink:href="#a-text2" class="text2" style="height:40%; width: 40%"></use>
+<use xlink:href="#a-text2" class="text2" style="height:40%; width: 40%"></use>
+<use xlink:href="#a-text2" class="text2" style="height:40%; width: 40%"></use>
+<use xlink:href="#a-text2" class="text2" style="height:40%; width: 40%"></use>
 
-  <p>&nbsp;</p>
+</svg>
 
-  <h2>
-  This is the home page for CV Enterprises Trivia application.
-  </h2>
-  <p>&nbsp;</p>
-
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  <p>&nbsp;</p>
+</div>
 
 
   <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/" %>
   </div>
 
 
-
-  <div class="column" style="background-color:#bbb;">
-
-
-  
-
-<svg height="500" width="500">
-  <path  d="M100 100 L100 10 L300 10 L300 300 L200 300 L200 400" style="fill:transparent;outline:transparent;stroke: #11324D;stroke-width:20;fill-rule:nonzero;"/>
-  <path class="svganimate" d="M100 100 L100 10 L300 10 L300 300 L200 300 L200 400" style="fill:transparent;outline:transparent;stroke:#C1CFC0;stroke-width:20;fill-rule:nonzero;"/>
-
-  <circle class="svgcirclehome" cx="200" cy="450" r="20" stroke="#11324D" stroke-width="10" fill="#0B4370" />
-
-  
-  Sorry, your browser does not support inline SVG.
-</svg>
-
-
-
-  </div>
-</div>
 
 
 

@@ -332,57 +332,140 @@ input, textarea, select, .uneditable-input {
 
 
 
+/* Main styles */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800);
 
-  .svganimate {
-    stroke-dasharray: 100;
-    animation: dash 12s infinite;
+.text {
+  fill: none;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  stroke-dasharray: 70 330;
+  stroke-dashoffset: 0;
+  -webkit-animation: stroke 6s infinite linear;
+  animation: stroke 6s infinite linear;
+}
+
+.text:nth-child(5n + 1) {
+  stroke: #040B11;
+  -webkit-animation-delay: -1.2s;
+  animation-delay: -1.2s;
+}
+.text:nth-child(5n + 2) {
+  stroke: #0D3C65;
+  -webkit-animation-delay: -2.4s;
+  animation-delay: -2.4s;
+}
+
+.text:nth-child(5n + 3) {
+  stroke: #1963A3;
+  -webkit-animation-delay: -3.6s;
+  animation-delay: -3.6s;
+}
+
+.text:nth-child(5n + 4) {
+  stroke: #1476CB;
+  -webkit-animation-delay: -4.8s;
+  animation-delay: -4.8s;
+}
+
+.text:nth-child(5n + 5) {
+  stroke: #058BFF;
+  -webkit-animation-delay: -6s;
+  animation-delay: -6s;
+}
+
+.text2 {
+  fill: none;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  stroke-dasharray: 70 330;
+  stroke-dashoffset: 0;
+  -webkit-animation: stroke 12s infinite linear;
+  animation: stroke 12s infinite linear;
+}
+
+.text2:nth-child(5n + 1) {
+  stroke: #040B11;
+  -webkit-animation-delay: -2.4s;
+  animation-delay: -2.4s;
+}
+.text2:nth-child(5n + 2) {
+  stroke: #0D3C65;
+  -webkit-animation-delay: -4.8s;
+  animation-delay: -4.8s;
+}
+
+.text2:nth-child(5n + 3) {
+  stroke: #1963A3;
+  -webkit-animation-delay: -7.2s;
+  animation-delay: -7.2s;
+}
+
+.text2:nth-child(5n + 4) {
+  stroke: #1476CB;
+  -webkit-animation-delay: -9.6s;
+  animation-delay: -9.6s;
+}
+
+.text2:nth-child(5n + 5) {
+  stroke: #058BFF;
+  -webkit-animation-delay: -12s;
+  animation-delay: -12s;
+}
+
+@-webkit-keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
   }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
+
+
+
+.body2 {
+  background: #aaa;
+  background-size: .2em 100%;
+  font: 14.5em/1 Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+  border-radius: 50px;
+}
+
+svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.welcome {
+  font-size: 100px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  animation: grow 8s linear infinite;
   
+}
 
- 
-  @keyframes dash {
-    0%
-    {
-      stroke-dashoffset: 0;
-      stroke: #C1CFC0;
-    }
-    50%
-    {
-        stroke-dashoffset: 1000;
-        stroke: #11324D;
-    }
-    100%
-    {
-      stroke-dashoffset: 0;
-      stroke: #C1CFC0;
-    }
+@keyframes grow {
+  0%
+  {
+    font-size: 50px;
 
   }
-
-  .svgcirclehome {
-    stroke-dasharray: 5;
-    animation: dash 12s infinite;
-    
+  50%
+  {
+    font-size: 100px;
   }
-  @keyframes dashcircle {
-    0%
-    {
-      stroke-dashoffset: 0;
-      stroke: #C1CFC0;
-      stroke-width: 5;
-
-    }
-    50%
-    {
-        stroke-dashoffset: 1000;
-        stroke: #11324D;
-        stroke-width: 100;
-    }
-    100%
-    {
-      stroke-dashoffset: 0;
-      stroke: #C1CFC0;
-      stroke-width: 5;
-    }
-    
+  100%
+  {
+    font-size: 50px;
   }
+}
