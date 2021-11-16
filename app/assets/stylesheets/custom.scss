@@ -334,34 +334,55 @@ input, textarea, select, .uneditable-input {
 
 
   .svganimate {
-    stroke-dasharray: 270;
-    stroke-dashoffset: 270;
-    animation: dash 6s infinite;
+    stroke-dasharray: 100;
+    animation: dash 12s infinite;
   }
+  
+
+ 
   @keyframes dash {
-    0%  {stroke-dashoffset: 0;}
-    50%  {stroke-dashoffset: 270;}
-    100%  {stroke-dashoffset: 0;}
+    0%
+    {
+      stroke-dashoffset: 0;
+      stroke: #C1CFC0;
+    }
+    50%
+    {
+        stroke-dashoffset: 1000;
+        stroke: #11324D;
+    }
+    100%
+    {
+      stroke-dashoffset: 0;
+      stroke: #C1CFC0;
+    }
+
   }
 
-  .svganimate2 {
-    stroke-dasharray: 270;
-    stroke-dashoffset: 270;
-    animation: dash 6s infinite;
+  .svgcirclehome {
+    stroke-dasharray: 5;
+    animation: dash 12s infinite;
+    
   }
-  @keyframes dash2 {
-    0%  {stroke-dashoffset: 0;}
-    50%  {stroke-dashoffset: 270;}
-    100%  {stroke-dashoffset: 0;}
-  }
+  @keyframes dashcircle {
+    0%
+    {
+      stroke-dashoffset: 0;
+      stroke: #C1CFC0;
+      stroke-width: 5;
 
-  .svganimate3 {
-    stroke-dasharray: 270;
-    stroke-dashoffset: 270;
-    animation: dash 6s infinite;
-  }
-  @keyframes dash3 {
-    0%  {stroke-dashoffset: 0;}
-    50%  {stroke-dashoffset: 270;}
-    100%  {stroke-dashoffset: 0;}
+    }
+    50%
+    {
+        stroke-dashoffset: 1000;
+        stroke: #11324D;
+        stroke-width: 100;
+    }
+    100%
+    {
+      stroke-dashoffset: 0;
+      stroke: #C1CFC0;
+      stroke-width: 5;
+    }
+    
   }
