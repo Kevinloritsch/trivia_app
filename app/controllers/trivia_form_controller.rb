@@ -53,20 +53,51 @@ class TriviaFormController < ApplicationController
       end
       return true
     end
+    def both_lengths(array)
+      mutiple_choice_counter = 0;
+      frq_counter = 0;
+      for input in array
+        if(input.to_s.include?("question") and !input.to_s.include?("frq"))
+          mutiple_choice_counter = mutiple_choice_counter +1
+        elsif(input.to_s.include?("frq") and input.to_s.include?("question"))
+          frq_counter = frq_counter +1;
+        end
+      end
+      return mutiple_choice_counter, frq_counter;
+    end
+    def get_mutiple_choice(array)
+      mutiplechoice = Array.new
+      for index in 0..(array.length()-1)
+        if((array[index].to_s.include?("answer") || array[index].to_s.include?("question")) && !array[index].to_s.include?("frq"))
+          mutiplechoice.append(array[index])
+        end
+      end
+      return mutiplechoice;
+    end
+    def get_frq(array)
+      frq = Array.new
+      for index in 0..(array.length()-1)
+        if(array[index].to_s.include?("frq"))
+          frq.append(array[index])
+        end
+      end
+      return frq
+    end
     @x = is_blank(@everything)
+    mutiple_choice_length, frq_length = both_lengths(@everything)
     if(@x.class == Integer)
       if(@x%5 == 0)
         flash[:danger] = "Question " + ((@x/5)+1).to_s + " has not filled out!"
       else
         flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out"
       end
-      redirect_back(fallback_location: root_path)
+      redirect_to create_path(:mutiple_choice_length => mutiple_choice_length, :frq_length => frq_length, :mutiple_choice => get_mutiple_choice(@everything).to_s, :frq => get_frq(@everything).to_s) and return
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
       question_number = (@valid[0][-1].to_i + 1).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
-      redirect_back(fallback_location: root_path)
+      redirect_to create_path(:mutiple_choice_length => mutiple_choice_length, :frq_length => frq_length, :mutiple_choice => get_mutiple_choice(@everything).to_s, :frq => get_frq(@everything).to_s) and return
     end
 
     # if(validate(@inputs))
