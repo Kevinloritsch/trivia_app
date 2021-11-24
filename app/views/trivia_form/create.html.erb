@@ -340,11 +340,11 @@ var counter = 0;
       <div class="row">
       <div class="col-md-6">
         <label>Question</label>
-        <input id=<%=JSON.parse(params["everything"])[index][0]%> type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(params["everything"])[index][1] %>>
+        <input name=<%=JSON.parse(params["everything"])[index][0]%> type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(params["everything"])[index][1] %>>
       </div>
       <div class="col-md-6">
         <label>Answer</label>
-        <input id=<%=JSON.parse(params["everything"])[index+1][0]%> type="text" class="form-control" placeholder="Answer" value=<%=JSON.parse(params["everything"])[index+1][1]%>>
+        <input name=<%=JSON.parse(params["everything"])[index+1][0]%> type="text" class="form-control" placeholder="Answer" value=<%=JSON.parse(params["everything"])[index+1][1]%>>
       </div>
     </div>
       </div>
