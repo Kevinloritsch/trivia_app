@@ -53,7 +53,7 @@ class TriviaFormController < ApplicationController
       end
       return true
     end
-    def both_lengths(array)
+    def question_length(array)
       mutiple_choice_counter = 0;
       frq_counter = 0;
       for input in array
@@ -63,7 +63,7 @@ class TriviaFormController < ApplicationController
           frq_counter = frq_counter +1;
         end
       end
-      return mutiple_choice_counter, frq_counter;
+      return mutiple_choice_counter+frq_counter;
     end
     def get_mutiple_choice(array)
       mutiplechoice = Array.new
@@ -90,13 +90,13 @@ class TriviaFormController < ApplicationController
       else
         flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out"
       end
-      redirect_to create_path(:everything => @everything.to_s) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)) and return
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
       question_number = (@valid[0][-1].to_i + 1).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
-      redirect_to create_path(:everything => @everything.to_s) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)) and return
     end
 
     # if(validate(@inputs))
