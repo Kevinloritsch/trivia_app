@@ -84,20 +84,19 @@ class TriviaFormController < ApplicationController
       return frq
     end
     @x = is_blank(@everything)
-    mutiple_choice_length, frq_length = both_lengths(@everything)
     if(@x.class == Integer)
       if(@x%5 == 0)
         flash[:danger] = "Question " + ((@x/5)+1).to_s + " has not filled out!"
       else
         flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out"
       end
-      redirect_to create_path(:mutiple_choice_length => mutiple_choice_length, :frq_length => frq_length, :mutiple_choice => get_mutiple_choice(@everything).to_s, :frq => get_frq(@everything).to_s) and return
+      redirect_to create_path(:everything => @everything.to_s) and return
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
       question_number = (@valid[0][-1].to_i + 1).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
-      redirect_to create_path(:mutiple_choice_length => mutiple_choice_length, :frq_length => frq_length, :mutiple_choice => get_mutiple_choice(@everything).to_s, :frq => get_frq(@everything).to_s) and return
+      redirect_to create_path(:everything => @everything.to_s) and return
     end
 
     # if(validate(@inputs))

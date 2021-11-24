@@ -1,6 +1,5 @@
 <script>
 var counter = 0;
-  var frq_counter = 0;
   var click = true;
   function create_mutiplechoice() {
     counter++;
@@ -90,15 +89,16 @@ var counter = 0;
     <div class="row">
       <div class="col-md-6">
         <label>Question</label>
-        <input name="frqquestion${frq_counter}" type="text" class="form-control" placeholder="Question">
+        <input name="frqquestion${counter}" type="text" class="form-control" placeholder="Question">
       </div>
       <div class="col-md-6">
         <label>Answer</label>
-        <input name="frqanswer${frq_counter}" type="text" class="form-control" placeholder="Answer">
+        <input name="frqanswer${counter}" type="text" class="form-control" placeholder="Answer">
       </div>
     </div>`;
     var row = document.getElementById("questionsrow");
     row.appendChild(frq);
+    // frq_counter++;
   }
   function destroy(node){
     var parent = node;
@@ -165,8 +165,6 @@ var counter = 0;
 <h1>Create New Trivia Game</h1>
 <form action="/submit" method="POST">
 <div class="container">
-</div>
-<div class="container">
   <div class="row">
       <div class="col-md-1 col-md-offset-11">
       <div class="dropdown">
@@ -183,6 +181,7 @@ var counter = 0;
       </div>
   </div>
 </div>
+<% if params['everything'] == nil %>
 <div class="myBox">
 <div class="container" id="questionsrow">
 <div id="mutiplechoice0" onmouseover="document.getElementById('trashbin').style.display = 'block'" onmouseout="document.getElementById('trashbin').style.display = 'none'">
@@ -252,7 +251,108 @@ var counter = 0;
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<% else %>
+<div class="myBox">
+  <% for index in 0..(JSON.parse(params["everything"]).length-1) %>
+    <% if JSON.parse(params["everything"])[index][0].include?("question") and !JSON.parse(params["everything"])[index][0].include?("frq") %>
+      <div class="container" id="questionsrow">
+<div id="mutiplechoice<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= index %>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index %>').style.display = 'none'">
+<div class="row">
+  <div class="col-md-1 col-md-offset-11">
+    <div id="trashbin<%= index %>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+    </svg>
+    </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-12">
+      <label>Question</label>
+      <input name="question<%= JSON.parse(params["everything"])[index][0][-1]%>" type="text" class="form-control" placeholder="Question">
+    </div>
+    </div>
+    <div class="row" style="padding-bottom: 15px">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+      <% if JSON.parse(params["everything"])[index+1][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+1][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+1][2]%>>&nbsp&nbsp</button>
+      <% end %>        </span>
+        <input name="<%= JSON.parse(params["everything"])[index+1][0]%>" type="text" class="form-control" placeholder="A." value=<%= JSON.parse(params["everything"])[index+1][1]%>>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" name="<%= JSON.parse(params["everything"])[index+2][0]%>" class="form-control" placeholder="B." value=<%= JSON.parse(params["everything"])[index+2][1]%>>
+        <span class="input-group-btn">
+      <% if JSON.parse(params["everything"])[index+2][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+2][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+2][2]%>>&nbsp&nbsp</button>
+      <% end %>
+      </span>
+      </div>
+    </div>
+  </div>
+      <div class="row" style="padding-bottom: 15px">
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+      <% if JSON.parse(params["everything"])[index+3][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+3][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+3][2]%>>&nbsp&nbsp</button>
+      <% end %>
+      </span>
+      <input name="<%= JSON.parse(params["everything"])[index+3][0]%>" type="text" class="form-control" placeholder="C." value=<%= JSON.parse(params["everything"])[index+3][1]%>>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <input name="<%= JSON.parse(params["everything"])[index+4][0]%>" type="text" class="form-control" placeholder="D." value=<%= JSON.parse(params["everything"])[index+4][1]%>>
+      <span class="input-group-btn">
+      <% if JSON.parse(params["everything"])[index+4][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+4][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+4][2]%>>&nbsp&nbsp</button>
+      <% end %>      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+</div>
+<% index = index + 4 %>
+    <% elsif JSON.parse(params["everything"])[index][0].include?("frqquestion") %>
+<div id="frq<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index%>').style.display = 'none'">
+<div class="row">
+  <div class="col-md-1 col-md-offset-11">
+    <div id="trashbin<%= index %>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+    </svg>
+    </div>
+  </div>
+</div>
+      <div class="row">
+      <div class="col-md-6">
+        <label>Question</label>
+        <input id=<%=JSON.parse(params["everything"])[index][0]%> type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(params["everything"])[index][1] %>>
+      </div>
+      <div class="col-md-6">
+        <label>Answer</label>
+        <input id=<%=JSON.parse(params["everything"])[index+1][0]%> type="text" class="form-control" placeholder="Answer" value=<%=JSON.parse(params["everything"])[index+1][1]%>>
+      </div>
+    </div>
+      </div>
+      <% index = index +1 %>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
 </div>
 <div class="container" style="padding-top: 15px">
 <input type="hidden" name="authenticity_token" value="token_value">
@@ -261,7 +361,6 @@ var counter = 0;
     <button class="btn btn-info" type="submit">Submit</button>
     </div>
   </div>
-<%= params %>
 </div>
 </form>
 </div>
