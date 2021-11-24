@@ -339,10 +339,27 @@ input, textarea, select, .uneditable-input {
   fill: none;
   stroke-width: 6;
   stroke-linejoin: round;
-  stroke-dasharray: 70 330;
-  stroke-dashoffset: 0;
-  -webkit-animation: stroke 6s infinite linear;
-  animation: stroke 6s infinite linear;
+  
+  animation: glowup 2s infinite linear;
+  animation-play-state: paused;
+}
+
+@keyframes glowup {
+  0% {
+    stroke-width: 6;
+    fill: none;
+  }
+  50% {
+    stroke-width: 20;
+  }
+  0% {
+    stroke-width: 6;
+    fill: none;
+  }
+}
+.text:hover
+{
+  animation-play-state: running;
 }
 
 .text:nth-child(5n + 1) {
@@ -439,4 +456,14 @@ svg {
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+.circlesvghome {
+  stroke-dasharray: 20;
+  animation: spin 10s linear infinite;
+}
+@keyframes spin {
+  to {
+    stroke-dashoffset: 1000;
+  }
 }
