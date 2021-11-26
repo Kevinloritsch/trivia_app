@@ -467,3 +467,22 @@ svg {
     stroke-dashoffset: 1000;
   }
 }
+
+
+.pathhome {
+  stroke-dasharray: 3100;
+  animation: dashpathhome 12s linear infinite;
+}
+
+@keyframes dashpathhome {
+  0% {
+    stroke-dashoffset: 3100;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 3100;
+
+  }
+}
