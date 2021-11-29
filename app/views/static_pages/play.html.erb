@@ -1,0 +1,22 @@
+<% provide(:title, "Game") %>
+<div class="jumbotron jumbotron-fluid" style="background-color: #AEAEAE">
+
+<button onclick="myFunction()">Click for a random room code:</button>
+<p id="codenum"></p>
+<script>
+    function myFunction() {
+        let randnum = Math.random().toString(36).substr(2, 25);
+        document.getElementById("codenum").innerHTML = `${randnum}`;
+    }
+</script>
+<button type="submit" class="btn">Join Game</button>
+<ol>
+<p>1. Join Game leads to room specific to id</p>
+<p>2. People in the same room have same stuff happen</p>
+<p>3. Make it so they text eachother as test, later implement to chat feature</p>
+<p>4. Delay texts to go after a timer</p>
+<p>5. Add answering system, implement with previous stuff</p>
+<p>6. Read trivia form from db</p>
+
+</ol>
+</div>

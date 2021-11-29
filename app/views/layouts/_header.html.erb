@@ -11,6 +11,8 @@
                     <% if logged_in? %>
                       <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Profile", current_user %></li>
                       <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Settings", edit_user_path(current_user) %></li>
+                      <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Create", create_path %></li>
+                      <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Play", play_path %></li>
                       <li style= "color: #9D9D9D; padding-top: 20px; padding-bottom: 20px;"><%= link_to "Log Out", logout_path, method:"delete" %></li>
 
                     <% else %>
