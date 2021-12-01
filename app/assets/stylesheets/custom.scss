@@ -476,13 +476,35 @@ svg {
 
 @keyframes dashpathhome {
   0% {
-    stroke-dashoffset: 3100;
+    stroke-dashoffset: 3200;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  90% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 3200;
+
+  }
+}
+
+.pathhome2 {
+  stroke-dasharray: 0;
+  animation: dashpathhome2 6s linear infinite;
+  animation-delay: 6s;
+}
+
+@keyframes dashpathhome2 {
+  0% {
+    stroke-dashoffset: 0;
   }
   50% {
     stroke-dashoffset: 0;
   }
   100% {
-    stroke-dashoffset: 3100;
+    stroke-dashoffset: 3200;
 
   }
 }
