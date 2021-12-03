@@ -1,4 +1,10 @@
 class TriviaFormController < ApplicationController
+  # before_action :user_is_logged_in
+  # def user_is_logged_in
+  #   if !session[:current_user]
+  #       redirect_to login_path
+  #   end
+  # end
   def trivia_form
   end
   def submit
@@ -86,9 +92,9 @@ class TriviaFormController < ApplicationController
     @x = is_blank(@everything)
     if(@x.class == Integer)
       if(@x%5 == 0)
-        flash[:danger] = "Question " + ((@x/5)+1).to_s + " has not filled out!"
+        flash[:danger] = "Question " + ((@x/5)+1).to_s + " is not filled out!"
       else
-        flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out"
+        flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out!"
       end
       redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)) and return
     end
@@ -98,6 +104,7 @@ class TriviaFormController < ApplicationController
       flash[:danger] = "Question" + question_number + " does not have an answer!"
       redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)) and return
     end
+    TriviaGame.create(:data=>@everything.to_s, :author=>'default')
 
     # if(validate(@inputs))
     #   TriviaGame.create(:data=>@everything.to_s)
