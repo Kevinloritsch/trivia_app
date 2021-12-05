@@ -187,6 +187,12 @@ if(isNaN(counter)){
 <% if params['everything'] == nil %>
 <div class="myBox">
 <div class="container" id="questionsrow">
+<div class="row">
+<div class="col-md-12">
+      <label>Title</label>
+      <input name="title" type="text" class="form-control" placeholder="Title">
+</div>
+</div>
 <div id="mutiplechoice0" onmouseover="document.getElementById('trashbin').style.display = 'block'" onmouseout="document.getElementById('trashbin').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
@@ -257,6 +263,17 @@ if(isNaN(counter)){
 <% else %>
 <div class="myBox">
 <div class="container" id="questionsrow">
+<% if params["title"] == nil %>
+<div class="col-md-12">
+      <label>Title</label>
+      <input name="title" type="text" class="form-control" placeholder="title">
+</div>
+<% else %>
+<div class="col-md-12">
+      <label>Title</label>
+      <input name="title" type="text" class="form-control" value="<%=params["title"]%>">
+</div>
+<% end %>
   <% for index in 0..(JSON.parse(params["everything"]).length-1) %>
     <% if JSON.parse(params["everything"])[index][0].include?("question") and !JSON.parse(params["everything"])[index][0].include?("frq") %>
       <div class="container" id="questionsrow">

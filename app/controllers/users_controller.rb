@@ -10,6 +10,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @trivia_games = Array.new;
+    TriviaGame.where(author: @user.email).find_each do |trivia_game|
+      @trivia_games.append(trivia_game);
+    end
     redirect_to root_url and return unless @user.activated?
   end
 

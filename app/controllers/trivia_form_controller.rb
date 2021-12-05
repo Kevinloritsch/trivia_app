@@ -1,10 +1,12 @@
 class TriviaFormController < ApplicationController
-  # before_action :user_is_logged_in
-  # def user_is_logged_in
-  #   if !session[:current_user]
-  #       redirect_to login_path
-  #   end
-  # end
+  before_action :logged_in_user
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please Log In."
+      redirect_to login_url
+   end
+end
   def trivia_form
   end
   def submit
@@ -89,6 +91,10 @@ class TriviaFormController < ApplicationController
       end
       return frq
     end
+    if(params["title"] == nil.to_s)
+      flash[:danger] = "Title is not filled out!"
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title => nil) and return
+    end
     @x = is_blank(@everything)
     if(@x.class == Integer)
       if(@x%5 == 0)
@@ -96,21 +102,14 @@ class TriviaFormController < ApplicationController
       else
         flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out!"
       end
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything),:title => params["title"]) and return
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
       question_number = (@valid[0][-1].to_i + 1).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title=> params["title"]) and return
     end
-    TriviaGame.create(:data=>@everything.to_s, :author=>'default')
-
-    # if(validate(@inputs))
-    #   TriviaGame.create(:data=>@everything.to_s)
-    # else
-    #   flash[:danger] = "Form field not filled out"
-    #   redirect_back(fallback_location: root_path)
-    # end
+    TriviaGame.create(:data=>@everything.to_s, :author=>current_user.email, :title=>params["title"])
   end
 end
