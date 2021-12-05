@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_12_05_074617) do
+=======
+ActiveRecord::Schema.define(version: 2021_12_03_170549) do
+>>>>>>> 25f234b04e74994a449194c9d057cbc931fde580
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -21,12 +25,21 @@ ActiveRecord::Schema.define(version: 2021_12_05_074617) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.text "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "trivia_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "data"
     t.string "author"
+<<<<<<< HEAD
     t.string "title"
+=======
+>>>>>>> 25f234b04e74994a449194c9d057cbc931fde580
   end
 
   create_table "users", force: :cascade do |t|
