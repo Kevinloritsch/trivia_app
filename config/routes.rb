@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get '/create', to: 'trivia_form#create'
   post'/submit', to: 'trivia_form#submit'
   get '/play', to: 'static_pages#play'
-  resources :users
+  resources :users do
+    resources :trivia_games
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 end

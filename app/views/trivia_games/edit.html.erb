@@ -162,10 +162,9 @@ if(isNaN(counter)){
     }
   }
 </script>
-
 <div class="center jumbotron" style="height: 600px;">
 
-<h1>Create New Trivia Game</h1>
+<h1>Edit Trivia Game</h1>
 <form action="/submit" method="POST">
 <div class="container">
   <div class="row">
@@ -184,19 +183,19 @@ if(isNaN(counter)){
       </div>
   </div>
 </div>
-<% if params['everything'] == nil %>
 <div class="myBox">
 <div class="container" id="questionsrow">
 <div class="row">
 <div class="col-md-12">
       <label>Title</label>
-      <input name="title" type="text" class="form-control" placeholder="Title">
+      <input name="title" type="text" class="form-control" value="<%=@trivia_game.title%>">
 </div>
 </div>
-<div id="mutiplechoice0" onmouseover="document.getElementById('trashbin').style.display = 'block'" onmouseout="document.getElementById('trashbin').style.display = 'none'">
+<% for index in 0..(JSON.parse(@trivia_game.data).length-1) %>
+<div id="mutiplechoice0" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%=index%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin" onmouseover="document.getElementById('trashbin').style.color = 'orange'" onmouseout="document.getElementById('trashbin').style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <div id="trashbin<%=index%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -204,154 +203,69 @@ if(isNaN(counter)){
     </div>
   </div>
 </div>
+<% if JSON.parse(@trivia_game.data)[index][0].include?("question") and !JSON.parse(@trivia_game.data)[index][0].include?("frq") %>
   <div class="row">
     <div class="col-md-12">
       <label>Question</label>
-      <input name="question0" type="text" class="form-control" placeholder="Question">
+      <input name="question<%= JSON.parse(@trivia_game.data)[index][0][-1]%>" type="text" class="form-control" value="<%=JSON.parse(@trivia_game.data)[index][1]%>">
     </div>
     </div>
     <div class="row" style="padding-bottom: 15px">
     <div class="col-md-6">
       <div class="input-group">
         <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-        </span>
-        <input name="answera0" type="text" class="form-control" placeholder="A.">
+        <% if JSON.parse(@trivia_game.data)[index+1][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+1][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+1][2]%>>&nbsp&nbsp</button>
+      <% end %> 
+      </span>  
+        <input name="<%= JSON.parse(@trivia_game.data)[index+1][0]%>" type="text" class="form-control" value="<%= JSON.parse(@trivia_game.data)[index+1][1]%>">
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group">
-        <input type="text" name="answerb0" class="form-control" placeholder="B.">
+        <input name="<%= JSON.parse(@trivia_game.data)[index+2][0]%>" type="text" class="form-control" value="<%= JSON.parse(@trivia_game.data)[index+2][1]%>">
         <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-        </span>
+        <% if JSON.parse(@trivia_game.data)[index+2][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+2][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+2][2]%>>&nbsp&nbsp</button>
+      <% end %> 
+      </span>  
       </div>
     </div>
   </div>
       <div class="row" style="padding-bottom: 15px">
   <div class="col-md-6">
     <div class="input-group">
-      <span class="input-group-btn">
-      <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+     <span class="input-group-btn">
+        <% if JSON.parse(@trivia_game.data)[index+3][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+3][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+3][2]%>>&nbsp&nbsp</button>
+      <% end %> 
       </span>
-      <input name="answerc0" type="text" class="form-control" placeholder="C.">
+      <input name="<%= JSON.parse(@trivia_game.data)[index+3][0]%>" type="text" class="form-control" value="<%= JSON.parse(@trivia_game.data)[index+3][1]%>">  
     </div>
   </div>
   <div class="col-md-6">
     <div class="input-group">
-      <input name="answerd0" type="text" class="form-control" placeholder="D.">
-      <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-      </span>
+      <input name="<%= JSON.parse(@trivia_game.data)[index+4][0]%>" type="text" class="form-control" value="<%= JSON.parse(@trivia_game.data)[index+4][1]%>">
+        <span class="input-group-btn">
+        <% if JSON.parse(@trivia_game.data)[index+4][2] %>
+        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+4][2]%>>&nbsp&nbsp</button>
+      <% else %>
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(@trivia_game.data)[index+4][2]%>>&nbsp&nbsp</button>
+      <% end %> 
+      </span>  
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
-</div>
-  <div id="frq0" style="display:none">
-    <div class="row">
-      <div class="col-md-6">
-        <label>Question</label>
-        <input type="text" class="form-control" placeholder="Question">
-      </div>
-      <div class="col-md-6">
-        <label>Answer</label>
-        <input type="text" class="form-control" placeholder="Answer">
-      </div>
-    </div>
-  </div>
-</div>
-<% else %>
-<div class="myBox">
-<div class="container" id="questionsrow">
-<% if params["title"] == nil %>
-<div class="col-md-12">
-      <label>Title</label>
-      <input name="title" type="text" class="form-control" placeholder="title">
-</div>
-<% else %>
-<div class="col-md-12">
-      <label>Title</label>
-      <input name="title" type="text" class="form-control" value="<%=params["title"]%>">
-</div>
-<% end %>
-  <% for index in 0..(JSON.parse(params["everything"]).length-1) %>
-    <% if JSON.parse(params["everything"])[index][0].include?("question") and !JSON.parse(params["everything"])[index][0].include?("frq") %>
-      <div class="container" id="questionsrow">
-<div id="mutiplechoice<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= index %>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index %>').style.display = 'none'">
-<div class="row">
-  <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin<%= index %>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-    </svg>
-    </div>
-  </div>
-</div>
-  <div class="row">
-    <div class="col-md-12">
-      <label>Question</label>
-      <input name="question<%= JSON.parse(params["everything"])[index][0][-1]%>" type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(params["everything"])[index][1]%>>
-    </div>
-    </div>
-    <div class="row" style="padding-bottom: 15px">
-    <div class="col-md-6">
-      <div class="input-group">
-        <span class="input-group-btn">
-      <% if JSON.parse(params["everything"])[index+1][2] %>
-        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+1][2]%>>&nbsp&nbsp</button>
-      <% else %>
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+1][2]%>>&nbsp&nbsp</button>
-      <% end %>        
-      </span>
-        <input name="<%= JSON.parse(params["everything"])[index+1][0]%>" type="text" class="form-control" placeholder="A." value=<%= JSON.parse(params["everything"])[index+1][1]%>>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="input-group">
-        <input type="text" name="<%= JSON.parse(params["everything"])[index+2][0]%>" class="form-control" placeholder="B." value=<%= JSON.parse(params["everything"])[index+2][1]%>>
-        <span class="input-group-btn">
-      <% if JSON.parse(params["everything"])[index+2][2] %>
-        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+2][2]%>>&nbsp&nbsp</button>
-      <% else %>
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+2][2]%>>&nbsp&nbsp</button>
-      <% end %>
-      </span>
-      </div>
-    </div>
-  </div>
-      <div class="row" style="padding-bottom: 15px">
-  <div class="col-md-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-      <% if JSON.parse(params["everything"])[index+3][2] %>
-        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+3][2]%>>&nbsp&nbsp</button>
-      <% else %>
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+3][2]%>>&nbsp&nbsp</button>
-      <% end %>
-      </span>
-      <input name="<%= JSON.parse(params["everything"])[index+3][0]%>" type="text" class="form-control" placeholder="C." value=<%= JSON.parse(params["everything"])[index+3][1]%>>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="input-group">
-      <input name="<%= JSON.parse(params["everything"])[index+4][0]%>" type="text" class="form-control" placeholder="D." value=<%= JSON.parse(params["everything"])[index+4][1]%>>
-      <span class="input-group-btn">
-      <% if JSON.parse(params["everything"])[index+4][2] %>
-        <button class="btn btn-info" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+4][2]%>>&nbsp&nbsp</button>
-      <% else %>
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button" value=<%= JSON.parse(params["everything"])[index+4][2]%>>&nbsp&nbsp</button>
-      <% end %>      
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-</div>
-</div>
-<% index = index + 4 %>
-    <% elsif JSON.parse(params["everything"])[index][0].include?("frqquestion") %>
-    <div class="container">
-<div id="frq<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index%>').style.display = 'none'">
+<% index = index +4 %>
+<% elsif JSON.parse(@trivia_game.data)[index][0].include?("frqquestion") %>
+<div class="container">
+<div id="frq<%= JSON.parse(@trivia_game.data)[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
     <div id="trashbin<%= index %>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
@@ -365,26 +279,26 @@ if(isNaN(counter)){
       <div class="row">
       <div class="col-md-6">
         <label>Question</label>
-        <input name=<%=JSON.parse(params["everything"])[index][0]%> type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(params["everything"])[index][1] %>>
+        <input name=<%=JSON.parse(@trivia_game.data)[index][0]%> type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(@trivia_game.data)[index][1] %>>
       </div>
       <div class="col-md-6">
         <label>Answer</label>
-        <input name=<%=JSON.parse(params["everything"])[index+1][0]%> type="text" class="form-control" placeholder="Answer" value=<%=JSON.parse(params["everything"])[index+1][1]%>>
+        <input name=<%=JSON.parse(@trivia_game.data)[index+1][0]%> type="text" class="form-control" placeholder="Answer" value=<%=JSON.parse(@trivia_game.data)[index+1][1]%>>
       </div>
     </div>
       </div>
       <% index = index +1 %>
       </div>
-    <% end %>
-  <% end %>
-  </div>
 <% end %>
+</div>
+<% end %>
+</div>
 </div>
 <div class="container" style="padding-top: 15px">
 <input type="hidden" name="authenticity_token" value="token_value">
 <div class="row">
     <div class="col-md-1 col-md-offset-11">
-    <button class="btn btn-info" type="submit">Submit</button>
+    <button class="btn btn-info" type="submit">Edit</button>
     </div>
   </div>
 </div>
