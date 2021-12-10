@@ -9,6 +9,17 @@ class TriviaGamesController < ApplicationController
     def index
         redirect_to(current_user)
     end
+    def show
+        user = User.find_by(id: params["user_id"].to_i)
+        trivia_games = Array.new;
+        if(params["destroy"].to_s == 'true')
+            TriviaGame.where(author: user.email).find_each do |trivia_game|
+                trivia_games.append(trivia_game);
+            end
+        end
+        trivia_games[params["id"].to_i].destroy
+        return redirect_to(current_user)
+    end
     def edit
         user_id = nil;
         @trivia_game_index  = nil;
