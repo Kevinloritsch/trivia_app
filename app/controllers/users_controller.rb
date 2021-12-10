@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     TriviaGame.where(author: @user.email).find_each do |trivia_game|
       @trivia_games.append(trivia_game);
     end
+    @trivia_games = @trivia_games.reverse()
     redirect_to root_url and return unless @user.activated?
   end
 

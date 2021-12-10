@@ -1,5 +1,6 @@
 class TriviaFormController < ApplicationController
   before_action :logged_in_user
+  # skip_before_filter :verify_authenticity_token  
   def logged_in_user
     unless logged_in?
       store_location
@@ -109,6 +110,20 @@ end
       question_number = (@valid[0][-1].to_i + 1).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
       redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title=> params["title"]) and return
+    end
+    for key in @inputs.keys
+      if(key.include?("id"))
+        user = User.find_by(id: params["user_id"])
+        trivia_games = Array.new;
+        TriviaGame.where(author: user.email).find_each do |trivia_game|
+            trivia_games.append(trivia_game);
+        end
+        trivia_game = trivia_games[params["id"].to_i]
+        trivia_game.data = @everything
+        trivia_game.title = params["title"].to_s
+        trivia_game.save
+        return redirect_to(current_user)
+      end
     end
     TriviaGame.create(:data=>@everything.to_s, :author=>current_user.email, :title=>params["title"])
   end

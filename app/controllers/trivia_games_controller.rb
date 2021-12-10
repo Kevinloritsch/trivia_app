@@ -11,12 +11,12 @@ class TriviaGamesController < ApplicationController
     end
     def edit
         user_id = nil;
-        trivia_game_index  = nil;
+        @trivia_game_index  = nil;
         for key in params.keys
             if(key.to_s == 'user_id')
                 user_id = params[key]
             elsif(key.to_s == "id")
-                trivia_game_index = params[key]
+                @trivia_game_index = params[key]
             end
         end
         user = User.find_by(id: user_id.to_i)
@@ -24,6 +24,10 @@ class TriviaGamesController < ApplicationController
         TriviaGame.where(author: user.email).find_each do |trivia_game|
             @trivia_games.append(trivia_game);
         end
-        @trivia_game = @trivia_games[trivia_game_index.to_i]
+        @trivia_game = @trivia_games[@trivia_game_index.to_i]
     end
+    def update
+        redirect_to(current_user)
+    end
+
 end

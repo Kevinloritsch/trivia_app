@@ -187,6 +187,7 @@ if(isNaN(counter)){
 <% if params['everything'] == nil %>
 <div class="myBox">
 <div class="container" id="questionsrow">
+<input type="hidden" name="authenticity_token" value="token_value">
 <div class="row">
 <div class="col-md-12">
       <label>Title</label>
@@ -263,6 +264,7 @@ if(isNaN(counter)){
 <% else %>
 <div class="myBox">
 <div class="container" id="questionsrow">
+<input type="hidden" name="authenticity_token" value="token_value">
 <% if params["title"] == nil %>
 <div class="col-md-12">
       <label>Title</label>
@@ -381,7 +383,7 @@ if(isNaN(counter)){
 <% end %>
 </div>
 <div class="container" style="padding-top: 15px">
-<input type="hidden" name="authenticity_token" value="token_value">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <div class="row">
     <div class="col-md-1 col-md-offset-11">
     <button class="btn btn-info" type="submit">Submit</button>

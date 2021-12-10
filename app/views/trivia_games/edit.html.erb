@@ -111,6 +111,9 @@ if(isNaN(counter)){
     }
     parent.remove();
   }
+  function submit_url(){
+    return window.location.href + "/submit"
+  }
   function highlight(node){
     var parent = node;
     if(node.getAttribute("class").includes("info")){
@@ -295,6 +298,8 @@ if(isNaN(counter)){
 </div>
 </div>
 <div class="container" style="padding-top: 15px">
+<input type="hidden" name="user_id" value="<%= params[:user_id] %>">
+<input type="hidden" name="id" value="<%= params["id"] %>">
 <input type="hidden" name="authenticity_token" value="token_value">
 <div class="row">
     <div class="col-md-1 col-md-offset-11">
