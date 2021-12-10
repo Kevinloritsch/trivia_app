@@ -98,7 +98,8 @@ if(isNaN(counter)){
         <label>Answer</label>
         <input name="frqanswer${counter}" type="text" class="form-control" placeholder="Answer">
       </div>
-    </div>`;
+    </div>
+`;
     var row = document.getElementById("questionsrow");
     row.appendChild(frq);
     // frq_counter++;
@@ -195,7 +196,8 @@ if(isNaN(counter)){
 </div>
 </div>
 <% for index in 0..(JSON.parse(@trivia_game.data).length-1) %>
-<div id="mutiplechoice0" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%=index%>').style.display = 'none'">
+<% if JSON.parse(@trivia_game.data)[index][0].include?("question") and !JSON.parse(@trivia_game.data)[index][0].include?("frq") %>
+<div id="mutiplechoice<%= JSON.parse(@trivia_game.data)[index][0][-1]%> " onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%=index%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
     <div id="trashbin<%=index%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
@@ -206,7 +208,6 @@ if(isNaN(counter)){
     </div>
   </div>
 </div>
-<% if JSON.parse(@trivia_game.data)[index][0].include?("question") and !JSON.parse(@trivia_game.data)[index][0].include?("frq") %>
   <div class="row">
     <div class="col-md-12">
       <label>Question</label>
@@ -267,7 +268,7 @@ if(isNaN(counter)){
 </div><!-- /.row -->
 <% index = index +4 %>
 <% elsif JSON.parse(@trivia_game.data)[index][0].include?("frqquestion") %>
-<div class="container">
+<div class="empty">
 <div id="frq<%= JSON.parse(@trivia_game.data)[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
@@ -289,11 +290,11 @@ if(isNaN(counter)){
         <input name=<%=JSON.parse(@trivia_game.data)[index+1][0]%> type="text" class="form-control" placeholder="Answer" value=<%=JSON.parse(@trivia_game.data)[index+1][1]%>>
       </div>
     </div>
-      </div>
-      <% index = index +1 %>
-      </div>
+    </div>
+    </div>
+    </div>
+<% index = index +1 %>
 <% end %>
-</div>
 <% end %>
 </div>
 </div>

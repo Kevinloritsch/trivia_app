@@ -94,7 +94,12 @@ end
     end
     if(params["title"] == nil.to_s)
       flash[:danger] = "Title is not filled out!"
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title => nil) and return
+      for key in @inputs.keys
+        if(key.include?("id"))
+          redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"], :title => params["title"]) and return;
+        end
+      end
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything),:title => params["title"]) and return
     end
     @x = is_blank(@everything)
     if(@x.class == Integer)
@@ -103,12 +108,22 @@ end
       else
         flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out!"
       end
+      for key in @inputs.keys
+        if(key.include?("id"))
+          redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"]) and return;
+        end
+      end
       redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything),:title => params["title"]) and return
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
       question_number = (@valid[0][-1].to_i + 1).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
+      for key in @inputs.keys
+        if(key.include?("id"))
+          redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"]) and return;
+        end
+      end
       redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title=> params["title"]) and return
     end
     for key in @inputs.keys
