@@ -1,15 +1,19 @@
 <% provide(:title, "Game") %>
 <div class="jumbotron jumbotron-fluid" style="background-color: #AEAEAE">
 
-<button onclick="myFunction()">Click for a random room code:</button>
+<button onclick="random_code()">Click for a random room code:</button>
 <p id="codenum"></p>
 <script>
-    function myFunction() {
+var url = '';
+    function random_code() {
         let randnum = Math.random().toString(36).substr(2, 25);
         document.getElementById("codenum").innerHTML = `${randnum}`;
+        if(url == ''){
+        url = window.location.href+'/' + document.getElementById("codenum").innerText
+        }
     }
 </script>
-<button type="submit" class="btn">Join Game</button>
+<a id="join_button" onclick='this.setAttribute("href", url);' type="submit" class="btn btn-default">Join Game</a>
 <ol>
 <p>1. Join Game leads to room specific to id</p>
 <p>2. People in the same room have same stuff happen</p>

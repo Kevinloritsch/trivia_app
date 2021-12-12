@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/create', to: 'trivia_form#create'
   post'/submit', to: 'trivia_form#submit'
   get '/play', to: 'static_pages#play'
+  get '/play/:room_id', action: :index, controller: 'play'
   resources :users do
     resources :trivia_games
   end
