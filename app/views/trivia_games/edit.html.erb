@@ -65,7 +65,6 @@ if(isNaN(counter)){
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
-</div>
     `
     var row = document.getElementById("questionsrow");
     row.appendChild(mutiple_choice);
@@ -268,6 +267,7 @@ if(isNaN(counter)){
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 <% index = index +4 %>
+</div>
 <% elsif JSON.parse(params["everything"])[index][0].include?("frqquestion") %>
 <div class="empty">
 <div id="frq<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index%>').style.display = 'none'">
@@ -294,9 +294,9 @@ if(isNaN(counter)){
     </div>
     </div>
 <% index = index +1 %>
-<% end %>
-<% end %>
 </div>
+<% end %>
+<% end %>
 </div>
 </div>
 <% else %>
