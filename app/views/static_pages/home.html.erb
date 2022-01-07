@@ -11,13 +11,18 @@ const scene = new THREE.Scene()
 
 // Material
 const material = new THREE.MeshStandardMaterial({
-    color: 'red',
+    color: '#03035C',
 })
 const mesh1 = new THREE.Mesh(
     new THREE.TorusGeometry(1, 0.4, 16, 60),
     material
 )
 scene.add(mesh1)
+
+// Light
+const ambientLight = new THREE.AmbientLight('#ffffff', .6)
+scene.add(ambientLight)
+
 
 /**
  * Sizes
@@ -40,6 +45,15 @@ window.addEventListener('resize', () =>
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+// Cursor
+const cursor = {}
+cursor.x = 0
+cursor.y = 0
+window.addEventListener('mousemove', (event) => {
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y = event.clientY / sizes.height - 0.5
 })
 
 /**
@@ -73,10 +87,18 @@ let previousTime = 0
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
 
     //Mesh Move
     mesh1.rotation.x = elapsedTime * 0.1
     mesh1.rotation.y = elapsedTime * 0.12
+
+    // Camera
+    const parallaxX = cursor.x * 0.5
+    const parallaxY = -cursor.y * 0.5
+    camera.position.x += (parallaxX - camera.position.x) * 5 * deltaTime
+    camera.position.y += (parallaxY - camera.position.y) * 5 * deltaTime
 
     // Render
     renderer.render(scene, camera)
@@ -149,9 +171,6 @@ tick()
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
 
 
   <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/" %>
