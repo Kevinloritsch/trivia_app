@@ -1,5 +1,96 @@
-  
-  <body>
+<body>
+
+<script type="module">
+import * as THREE from 'https://cdn.skypack.dev/three@@0.136.0';
+
+  // Canvas
+const canvas = document.querySelector('canvas.webgl')
+
+// Scene
+const scene = new THREE.Scene()
+
+// Material
+const material = new THREE.MeshStandardMaterial({
+    color: 'red',
+})
+const mesh1 = new THREE.Mesh(
+    new THREE.TorusGeometry(1, 0.4, 16, 60),
+    material
+)
+scene.add(mesh1)
+
+/**
+ * Sizes
+ */
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+/**
+ * Camera
+ */
+// Group
+const cameraGroup = new THREE.Group()
+scene.add(cameraGroup)
+
+// Base camera
+const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100)
+camera.position.z = 6
+cameraGroup.add(camera)
+
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Animate
+ */
+const clock = new THREE.Clock()
+let previousTime = 0
+
+const tick = () =>
+{
+    const elapsedTime = clock.getElapsedTime()
+
+    //Mesh Move
+    mesh1.rotation.x = elapsedTime * 0.1
+    mesh1.rotation.y = elapsedTime * 0.12
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+
+tick()
+
+</script>
+
+<canvas class="webgl"></canvas>
+    
   <svg viewBox="0 0 1150 500" style="font: 14.5em/1 Open Sans, Impact; text-transform: uppercase; margin: 0; border-radius: 50px;">
   
 
@@ -44,22 +135,6 @@
 </div>
 
 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
