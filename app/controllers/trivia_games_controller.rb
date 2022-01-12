@@ -6,6 +6,11 @@ class TriviaGamesController < ApplicationController
           redirect_to login_url
        end
     end
+    def host
+        if(current_user.id.to_s != params[:user_id])
+            redirect_to(current_user)
+        end
+    end
     def index
         redirect_to(current_user)
     end
