@@ -1,3 +1,6 @@
 <h2>Host <%= User.find_by(:email=>Room.find_by(:session=>params["gamesession"]).author).name%></h2>
 <p id="gamesession" style="display: none"><%=params[:gamesession]%></p>
 <h2 id="players">Players Joined:</h2>
+<% for player in Room.find_by(:session=>params["gamesession"]).players.split(", ") %>
+<h2><%=User.find(player).name%></h2>
+<% end %>
