@@ -300,35 +300,35 @@ input, textarea, select, .uneditable-input {
     height:100%;
   }
 
-.loader-wrapper {
-    background-color:#11324D;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-    display: flex;
+// .loader-wrapper {
+//     background-color:#11324D;
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;
+//     box-sizing: border-box;
+//     display: flex;
 
-  }
+//   }
 
-  .clipped {
-    animation: circle 3s infinite;
-    background: #0D497B;
-    clip-path: circle(75%);
-    height: 200px;
-    width: 200px;
-  }
+//   .clipped {
+//     animation: circle 3s infinite;
+//     background: #0D497B;
+//     clip-path: circle(75%);
+//     height: 200px;
+//     width: 200px;
+//   }
   
-  @keyframes circle {
-    0% { clip-path: circle(75%); }
-    50% { clip-path: circle(25%); }
-    100% { clip-path: circle(75%); }
-  }
+//   @keyframes circle {
+//     0% { clip-path: circle(75%); }
+//     50% { clip-path: circle(25%); }
+//     100% { clip-path: circle(75%); }
+//   }
 
 
 

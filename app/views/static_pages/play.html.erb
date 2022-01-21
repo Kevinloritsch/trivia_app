@@ -1,19 +1,11 @@
 <% provide(:title, "Game") %>
 <div class="jumbotron jumbotron-fluid" style="background-color: #AEAEAE">
-
-<button onclick="random_code()">Click for a random room code:</button>
-<p id="codenum"></p>
-<script>
-var url = '';
-    function random_code() {
-        let randnum = Math.random().toString(36).substr(2, 25);
-        document.getElementById("codenum").innerHTML = `${randnum}`;
-        if(url == ''){
-        url = window.location.href+'/' + document.getElementById("codenum").innerText
-        }
-    }
-</script>
-<a id="join_button" onclick='this.setAttribute("href", url);' type="submit" class="btn btn-default">Join Game</a>
+<%= form_with url: '/play' , method: :post do |form| %>
+  <%= form.label :query, "Game Session" %>
+  <input name="gamesession">
+  <%= form.submit "Submit" %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<% end %>
 <ol>
 <p>1. Join Game leads to room specific to id</p>
 <p>2. People in the same room have same stuff happen</p>

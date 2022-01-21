@@ -10,6 +10,19 @@ class TriviaGamesController < ApplicationController
         if(current_user.id.to_s != params[:user_id])
             redirect_to(current_user)
         end
+        if(!params[:gamesession].empty?)
+            Room.create(session: params[:gamesession].to_s, author: User.find_by(id: params[:user_id].to_s).email);
+        end
+    end
+    def submit
+        if(Room.find_by(session: params[:gamesession].to_s).nil?)
+            flash[:danger] = "Invalid game code"
+            return redirect_to('/play')
+        end
+        return redirect_to(clients_play_trivia_game_path(:gamesession=>params["gamesession"]))
+    end
+    def clients
+        render "play/client"
     end
     def index
         redirect_to(current_user)
