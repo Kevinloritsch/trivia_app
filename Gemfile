@@ -9,7 +9,7 @@ gem 'faker',      '2.18.0'
 gem 'will_paginate',              '3.3.0'
 gem 'bootstrap-will_paginate',    '1.0.0'
 gem 'puma',       '5.3.1'
-gem 'sass-rails', '6.0.0'
+gem 'sass-rails', require: false
 gem 'webpacker',  '5.4.0'
 gem 'turbolinks', '5.2.1'
 gem 'jbuilder',   '2.10.0'

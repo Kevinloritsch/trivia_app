@@ -10,8 +10,9 @@ document.addEventListener('turbolinks:load', ()=> {
       },
     
       disconnected() {
+        this.disconnect();
         console.log("Disconnected from room channel...")
-        
+        this.send({ sent_by: "room_channel_"+room_id.toString(), body: "This is a cool chat app." })
         // Called when the subscription has been terminated by the server
       },
     
@@ -19,8 +20,6 @@ document.addEventListener('turbolinks:load', ()=> {
         // Called when there's incoming data on the websocket for this channel
         console.log("Incoming Data: " + data.message.toString());
         document.getElementById("players").innerText = document.getElementById("players").innerText + data.message.toString()+ "\n";
-
-        
       }
     });
   }
