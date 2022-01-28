@@ -6,9 +6,10 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    
+    players = Room.find_by(:session=>params["room"]).players.split(", ");
+    players.pop
+    Room.find_by(:session=>params["room"].to_s).update(players: players.join(", "));
   end
   def receive(data)
-    ActiveCable.server.broadcast("room_channel_#{data.sent_by.to_s}", message: data.body.to_s)
   end
 end

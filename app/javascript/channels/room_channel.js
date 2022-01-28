@@ -1,8 +1,9 @@
 import consumer from "./consumer"
 var roomChannel;
+var room_id;
 document.addEventListener('turbolinks:load', ()=> {
   if(document.getElementById("gamesession") != null){
-    var room_id = document.getElementById('gamesession').innerText
+      room_id = document.getElementById('gamesession').innerText
       roomChannel = consumer.subscriptions.create({channel: "RoomChannel", room: room_id}, {
       connected() {
         // Called when the subscription is ready for use on the server
@@ -10,9 +11,9 @@ document.addEventListener('turbolinks:load', ()=> {
       },
     
       disconnected() {
-        this.disconnect();
+        this.unsubscribe();
+        // this.send({ sent_by: "room_channel_"+room_id.toString(), body: "This is a cool chat app." })
         console.log("Disconnected from room channel...")
-        this.send({ sent_by: "room_channel_"+room_id.toString(), body: "This is a cool chat app." })
         // Called when the subscription has been terminated by the server
       },
     
@@ -22,5 +23,8 @@ document.addEventListener('turbolinks:load', ()=> {
         document.getElementById("players").innerText = document.getElementById("players").innerText + data.message.toString()+ "\n";
       }
     });
+  }else if(roomChannel != null){
+    roomChannel.disconnected()
+    roomChannel = null
   }
 })
