@@ -30,7 +30,9 @@
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
     <% end %>
 <%= yield %>
-
+<script type="text/javascript" data-turbolinks-eval=false>
+  // console.log("I'm only run once on the initial page load");
+</script>
 <script type="text/javascript">
           $(".loader-wrapper").fadeOut(2500);
         
