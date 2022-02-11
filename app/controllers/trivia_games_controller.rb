@@ -19,11 +19,17 @@ class TriviaGamesController < ApplicationController
             flash[:danger] = "Invalid game code"
             return redirect_to('/play')
         end
-        Room.find_by(session: params["gamesession"]).update(players: (Room.find_by(session: params["gamesession"]).players.to_s + ", " + current_user.id.to_s).to_s)
+        if(Room.find_by(session: params["gamesession"]).players.to_s == "")
+            Room.find_by(session: params["gamesession"]).update(players: (current_user.id.to_s).to_s)
+        else
+            Room.find_by(session: params["gamesession"]).update(players: (Room.find_by(session: params["gamesession"]).players.to_s + ", " + current_user.id.to_s).to_s)
+        end
         return redirect_to(clients_play_trivia_game_path(:gamesession=>params["gamesession"]))
     end
     def clients
+        params["current_user"] = current_user.id
         render "play/client"
+
     end
     def index
         redirect_to(current_user)

@@ -5,4 +5,5 @@
 <% for player in Room.find_by(:session=>params["gamesession"]).players.split(", ") %>
 <h2><%=User.find(player).name%></h2>
 <% end %>
+<p id="player" style="display: hidden"><%= params["current_user"] %></p>
 </div>
