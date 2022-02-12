@@ -3,7 +3,7 @@
 <h2>Players Joined:</h2>
 <div id="players">
 <% for player in Room.find_by(:session=>params["gamesession"]).players.split(", ") %>
-<% if User.find(player) != current_user %>
+<% if User.find(player).id != current_user.id %>
     <h2><%=User.find(player).name%></h2>
 <% end %>
 <% end %>
