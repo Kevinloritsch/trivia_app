@@ -1,3 +1,5 @@
+<div id="container">
+<div id="container1">
 <h2>Host <%= User.find_by(:email=>Room.find_by(:session=>params["gamesession"]).author).name%></h2>
 <p id="gamesession" style="display: none"><%=params[:gamesession]%></p>
 <h2>Players Joined:</h2>
@@ -9,3 +11,5 @@
 <% end %>
 </div>
 <p id="player" style="display: hidden"><%= params["current_user"] %></p>
+</div>
+</div>

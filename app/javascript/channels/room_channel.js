@@ -9,7 +9,13 @@ document.addEventListener('turbolinks:load', ()=> {
       connected() {
         // Called when the subscription is ready for use on the server
         console.log("Connecting from room channel: "+ room_id.toString())
-        player = document.getElementById("player").innerText.toString()
+        if(document.getElementById("player") != null){
+          player = document.getElementById("player").innerText.toString()
+        }
+        if(document.location.pathname.includes("host")){
+          this.send({host: document.getElementById("host").innerText})
+          document.getElementById("play_button").addEventListener("click", function(){roomChannel.send({play: document.getElementById("triviagame_id").innerText})})
+        }
         this.send({ id: player })
       },
     
@@ -45,6 +51,21 @@ document.addEventListener('turbolinks:load', ()=> {
               break;
             }
           }
+        }else if(data.trivia_game != undefined){
+          document.getElementById("container1").remove();
+          var triv  = JSON.parse(data.trivia_game.toString())
+          for(var i = 0; i < triv.length; i++){
+            if(triv[i][0].toString().includes("question")){
+              var question = document.createElement("h2")
+              question.innerText = triv[i][1];
+              document.getElementById("container").appendChild(question);
+            }else if(triv[i][0].toString().includes("answer")){
+              var answer = document.createElement("h2")
+              answer.innerText = triv[i][1];
+              document.getElementById("container").appendChild(answer);
+            }
+          }
+
         }
       }
     });

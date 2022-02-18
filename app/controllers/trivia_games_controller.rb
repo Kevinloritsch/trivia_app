@@ -22,7 +22,16 @@ class TriviaGamesController < ApplicationController
         if(Room.find_by(session: params["gamesession"]).players.to_s == "")
             Room.find_by(session: params["gamesession"]).update(players: (current_user.id.to_s).to_s)
         else
-            Room.find_by(session: params["gamesession"]).update(players: (Room.find_by(session: params["gamesession"]).players.to_s + ", " + current_user.id.to_s).to_s)
+            boolean = true;
+            for player in Room.find_by(session: params["gamesession"]).players.to_s.split(", ")
+                # puts(player + '\t' + current_user.id.to_s)
+                if(player == current_user.id.to_s)
+                    boolean = false;
+                end
+            end
+            if(boolean)
+                Room.find_by(session: params["gamesession"]).update(players: Room.find_by(session: params["gamesession"]).players.to_s + ", " + current_user.id.to_s)
+            end
         end
         return redirect_to(clients_play_trivia_game_path(:gamesession=>params["gamesession"]))
     end
