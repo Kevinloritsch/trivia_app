@@ -59,10 +59,32 @@ document.addEventListener('turbolinks:load', ()=> {
               var question = document.createElement("h2")
               question.innerText = triv[i][1];
               document.getElementById("container").appendChild(question);
-            }else if(triv[i][0].toString().includes("answer")){
-              var answer = document.createElement("h2")
-              answer.innerText = triv[i][1];
-              document.getElementById("container").appendChild(answer);
+            }else if(triv[i][0].includes("frq")){
+              var html = 
+              `<div class="row">
+                <input class="form-control" name="${triv[i][0]}">
+               </div>`
+               document.getElementById("container").innerHTML = document.getElementById("container").innerHTML + html;
+              }else if(triv[i][0].toString().includes("answer")){
+              var html = 
+              `<div class="row" style="padding: 2px">
+                <div class="col-md-6">
+                  <button value="${triv[i][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i][1]}</button>
+                </div>
+                <div class="col-md-6">
+                  <button value="${triv[i+1][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i+1][1]}</button>
+                </div>
+               </div>
+               <div class="row" style="padding: 2px">
+                <div class="col-md-6">
+                  <button value="${triv[i+2][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i+2][1]}</button>
+                </div>
+                <div class="col-md-6">
+                  <button value="${triv[i+3][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i+3][1]}</button>
+                </div>
+               </div>`
+              document.getElementById("container").innerHTML = document.getElementById("container").innerHTML + html;
+              i=i+3
             }
           }
 
