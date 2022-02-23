@@ -61,7 +61,7 @@ document.addEventListener('turbolinks:load', ()=> {
               document.getElementById("container").appendChild(question);
             }else if(triv[i][0].includes("frq")){
               var html = 
-              `<div class="row">
+              `<div class="form-group row" onmouseout="this.children[0].value.toLocaleLowerCase() == '${triv[i][1]}'.toLocaleLowerCase() ? this.setAttribute('class', this.class + ' has-success has-feedback') : this.setAttribute('class', this.class + ' has-error has-feedback') " onmouseover="this.children[0].value.toLocaleLowerCase() == '${triv[i][1]}'.toLocaleLowerCase() ? this.setAttribute('class', this.class + ' has-success has-feedback') : this.setAttribute('class', this.class + ' has-error has-feedback') ">
                 <input class="form-control" name="${triv[i][0]}">
                </div>`
                document.getElementById("container").innerHTML = document.getElementById("container").innerHTML + html;
