@@ -351,7 +351,7 @@ if(isNaN(counter)){
       </div>
     </div>
   </div>
-      <div class="row" style="padding-bottom: 15px">
+  <div class="row" style="padding-bottom: 15px">
   <div class="col-md-6">
     <div class="input-group">
      <span class="input-group-btn">
@@ -377,6 +377,7 @@ if(isNaN(counter)){
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
+</div>
 <% index = index +4 %>
 <% elsif JSON.parse(@trivia_game.data)[index][0].include?("frqquestion") %>
 <div class="empty">
@@ -406,14 +407,13 @@ if(isNaN(counter)){
 <% index = index +1 %>
 <% end %>
 <% end %>
-</div>
-</div>
-</div>
 <% end %>
+</div>
+</div>
 <div class="container" style="padding-top: 15px">
 <input type="hidden" name="user_id" value="<%= params[:user_id] %>">
 <input type="hidden" name="id" value="<%= params["id"] %>">
-<input type="hidden" name="authenticity_token" value="token_value">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <div class="row">
     <div class="col-md-1 col-md-offset-11">
     <button class="btn btn-info" type="submit">Edit</button>
