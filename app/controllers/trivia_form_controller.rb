@@ -121,10 +121,10 @@ end
       flash[:danger] = "Question" + question_number + " does not have an answer!"
       for key in @inputs.keys
         if(key.include?("id"))
-          redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"]) and return;
+          redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"],:title => params["title"]) and return;
         end
       end
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title=> params["title"]) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title=> params["title"],:title => params["title"]) and return
     end
     for key in @inputs.keys
       if(key.include?("id"))
