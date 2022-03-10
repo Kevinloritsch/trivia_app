@@ -26,11 +26,15 @@ class RoomChannel < ApplicationCable::Channel
         trivia_games.append(trivia_game);
       end
       host_trivia_game = trivia_games[data["play"].to_i]
-      ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", message: host_trivia_game.data)
+      # ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", message: host_trivia_game.data)
       ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", trivia_game: host_trivia_game.data)
     end
+    ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", message: data["player"])
     if(data["player"] != nil)
       $remove_player = data["player"]
+    end
+    if(data["player"].to_s == "Host has disconnected from room")
+      Room.find_by(:session=>params["room"].to_s).delete
     end
   end
 end
