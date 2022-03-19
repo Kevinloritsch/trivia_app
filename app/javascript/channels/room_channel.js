@@ -93,7 +93,11 @@ document.addEventListener('turbolinks:load', ()=> {
     });
   }else if(roomChannel != null){
     // console.log(player)
-    roomChannel.send({ player:  player})
+    if(player == undefined){
+      roomChannel.send({player: "Host has disconnected from room"})
+    }else{
+      roomChannel.send({ player:  player})
+    }  
     roomChannel.disconnected()
     roomChannel = null
   }

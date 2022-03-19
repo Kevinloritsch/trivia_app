@@ -17,10 +17,10 @@ end
     for key in @inputs.keys
       if(key.include?("answer"))
         if(key.include?(", 0") || key.include?("frq"))
-          answer = [key,@inputs[key], true]
+          answer = [key,@inputs[key].to_s, true]
           @everything.append(answer);
         else
-          answer = [key,@inputs[key], false]
+          answer = [key,@inputs[key].to_s, false]
           @everything.append(answer);
         end
       elsif(key.include?("question"))

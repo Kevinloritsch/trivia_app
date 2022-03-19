@@ -511,4 +511,22 @@ svg {
     bottom: 30px;
     outline: none;
 }
-
+.loadbar
+{
+     width:25px;
+     height:200px;
+     background-color:#fff;
+     border:1px solid #ccc;
+     position:relative; 
+}
+.bar
+{
+    width:100%;
+    display:block;        
+    font-family:arial;
+    font-size:12px; 
+    background-color:#bb9319;
+    color:#fff;       
+    position:absolute;
+    bottom:0;        
+}
