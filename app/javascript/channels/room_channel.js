@@ -1,7 +1,9 @@
+import e from "turbolinks";
 import consumer from "./consumer"
 var roomChannel;
 var room_id;
 var player;
+var counter;
 document.addEventListener('turbolinks:load', ()=> {
   if(document.getElementById("gamesession") != null){
       room_id = document.getElementById('gamesession').innerText
@@ -54,39 +56,46 @@ document.addEventListener('turbolinks:load', ()=> {
         }else if(data.trivia_game != undefined){
           document.getElementById("container1").remove();
           var triv  = JSON.parse(data.trivia_game.toString())
-          for(var i = 0; i < triv.length; i++){
-            if(triv[i][0].toString().includes("question")){
-              var question = document.createElement("h2")
-              question.innerText = triv[i][1];
-              document.getElementById("container").appendChild(question);
-            }else if(triv[i][0].includes("frq")){
-              var html = 
-              `<div class="form-group row" onmouseout="this.children[0].value.toLocaleLowerCase() == '${triv[i][1]}'.toLocaleLowerCase() ? this.setAttribute('class', this.class + ' has-success has-feedback') : this.setAttribute('class', this.class + ' has-error has-feedback') " onmouseover="this.children[0].value.toLocaleLowerCase() == '${triv[i][1]}'.toLocaleLowerCase() ? this.setAttribute('class', this.class + ' has-success has-feedback') : this.setAttribute('class', this.class + ' has-error has-feedback') ">
-                <input class="form-control" name="${triv[i][0]}">
-               </div>`
-               document.getElementById("container").innerHTML = document.getElementById("container").innerHTML + html;
-              }else if(triv[i][0].toString().includes("answer")){
-              var html = 
-              `<div class="row" style="padding: 2px">
-                <div class="col-md-6">
-                  <button value="${triv[i][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i][1]}</button>
-                </div>
-                <div class="col-md-6">
-                  <button value="${triv[i+1][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i+1][1]}</button>
-                </div>
-               </div>
-               <div class="row" style="padding: 2px">
-                <div class="col-md-6">
-                  <button value="${triv[i+2][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i+2][1]}</button>
-                </div>
-                <div class="col-md-6">
-                  <button value="${triv[i+3][2]}" onclick="this.value == 'true' ? this.setAttribute('class','btn btn-success') : this.setAttribute('class','btn btn-danger')" class="btn btn-info">${triv[i+3][1]}</button>
-                </div>
-               </div>`
-              document.getElementById("container").innerHTML = document.getElementById("container").innerHTML + html;
-              i=i+3
+          var buttons = [];
+          var row = [];
+          var cols = [];
+          row[0] = document.createElement("div")
+          row[0].className = "row"
+          row[1] = document.createElement("div")
+          row[1].className = "row"
+          console.log(data.trivia_game);
+          for(var counter = 0; counter < 4; counter++){
+            var col = document.createElement("div")
+            col.className = "col-md-6"
+            buttons[counter] = document.createElement("button");
+            buttons[counter].id = triv[counter+1][0]
+            buttons[counter].innerHTML = triv[counter+1][1].toString()
+            buttons[counter].value = triv[counter+1][2]
+            buttons[counter].className = "btn btn-info"
+            if(buttons[counter].value == 'true'){
+              buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),test_function(this, triv)}
+            }else{
+              buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger')}
             }
+            col.appendChild(buttons[counter])
+            if(counter < 2){
+              row[0].appendChild(col);
+            }else{
+              row[1].appendChild(col);
+            }
+
           }
+          console.log(buttons[0]);
+          var html = 
+          `
+          <div class="row">
+          <h2 id="${triv[0][0]}">${triv[0][1]}</h2>
+          </div>`
+
+            document.getElementById("container").innerHTML = html;
+            document.getElementById("container").appendChild(row[0])
+            document.getElementById("container").appendChild(row[1])
+            // i=i+3
 
         }
       }

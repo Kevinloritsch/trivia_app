@@ -23,5 +23,8 @@ Turbolinks.start()
 ActiveStorage.start()
 
 $(document).on("turbolinks:load", function() {
-    // console.log("We are ready!")
+    // console.log('bruh')
+    // function pagination(){
+    //     document.getElementById("container").innerHTML = '';
+    // }
 })

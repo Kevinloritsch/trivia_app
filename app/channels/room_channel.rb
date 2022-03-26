@@ -14,6 +14,9 @@ class RoomChannel < ApplicationCable::Channel
     Room.find_by(:session=>params["room"].to_s).update(players: players.join(", ").to_s);
   end
   def receive(data)
+    if(data["message"] != nil)
+      ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", message: data["message"].to_s)
+    end
     if(data["id"] != nil)
       ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", player: User.find(data["id"].to_i).name.to_s)
     end

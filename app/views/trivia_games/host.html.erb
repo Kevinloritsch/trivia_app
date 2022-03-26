@@ -19,4 +19,45 @@
 <p id="triviagame_id" style="display: hidden"><%= params["id"] %></p>
 </div>
 </div>
+<script>
+function test_function(button, triv){
+    var index = button.parentElement.parentElement.parentElement.children[0].children[0].id
+    var container = button.parentElement.parentElement.parentElement;
+    for(var i = 0; i < triv.length; i++){
+        // console.log(triv[i][1])
+        if(triv[i][0].indexOf(index) != -1){
+            if(triv[i+5][0].includes("frq")){
+                console.log("this code needs to be finished")
+                break
+
+            }else{
+
+                setTimeout(function(){
+                    var question = button.parentElement.parentElement.parentElement.children[0].children[0]
+                    question.id = triv[i+5][0]
+                    question.innerHTML = triv[i+5][1]
+                    var buttons = container.getElementsByTagName("button");
+                    console.log(buttons);
+                    for(var x = 0; x < buttons.length; x++){
+                        buttons[x].innerHTML = triv[i+6+x][1]
+                        buttons[x].value = triv[i+6+x][2].toString()
+                        buttons[x].className = "btn btn-info"
+                        if(buttons[x].value == 'true'){
+                            buttons[x].onclick = function(){this.setAttribute('class', 'btn btn-success'),test_function(this, triv)}
+                        }else{
+                            buttons[x].onclick = function(){this.setAttribute("class", "btn btn-danger")}
+                        }
+                        // buttons[x].removeEventListener("click", clickHandler)
+                            
+                    }
+                    // button.innerHTML = triv [i+7][1]
+                    // button.value = triv[i+7][2].toString()
+                    // button.className = "btn btn-info"
+                }, 750); 
+                break;
+            }
+        }
+    }
+}
+</script>
 
