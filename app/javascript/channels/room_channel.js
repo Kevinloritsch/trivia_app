@@ -3,7 +3,6 @@ import consumer from "./consumer"
 var roomChannel;
 var room_id;
 var player;
-var counter;
 document.addEventListener('turbolinks:load', ()=> {
   if(document.getElementById("gamesession") != null){
       room_id = document.getElementById('gamesession').innerText
@@ -60,42 +59,63 @@ document.addEventListener('turbolinks:load', ()=> {
           var row = [];
           var cols = [];
           row[0] = document.createElement("div")
-          row[0].className = "row"
+          row[0].className = "form-group row"
           row[1] = document.createElement("div")
           row[1].className = "row"
-          console.log(data.trivia_game);
-          for(var counter = 0; counter < 4; counter++){
+          if(triv[0][0].includes("frq")){
+            row[0].innerHTML = `<div class="col"><input name="${triv[0][0]}" type="text" class="form-control"></div>`
+            var html = 
+            `
+            <div class="row">
+            <h2 id="${triv[0][0]}">${triv[0][1]}</h2>
+            </div>`
             var col = document.createElement("div")
-            col.className = "col-md-6"
-            buttons[counter] = document.createElement("button");
-            buttons[counter].id = triv[counter+1][0]
-            buttons[counter].innerHTML = triv[counter+1][1].toString()
-            buttons[counter].value = triv[counter+1][2]
-            buttons[counter].className = "btn btn-info"
-            if(buttons[counter].value == 'true'){
-              buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),test_function(this, triv)}
-            }else{
-              buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger')}
-            }
-            col.appendChild(buttons[counter])
-            if(counter < 2){
-              row[0].appendChild(col);
-            }else{
-              row[1].appendChild(col);
-            }
-
-          }
-          console.log(buttons[0]);
-          var html = 
-          `
-          <div class="row">
-          <h2 id="${triv[0][0]}">${triv[0][1]}</h2>
-          </div>`
-
+            col.className = "col-md-1 col-md-offset-11";
+            var button = document.createElement("button");
+            button.className = "btn btn-info"
+            button.innerText = "Submit"
+            button.onclick = function(){test_function(this, triv)}
             document.getElementById("container").innerHTML = html;
             document.getElementById("container").appendChild(row[0])
-            document.getElementById("container").appendChild(row[1])
-            // i=i+3
+            col.appendChild(button);
+            row[1].appendChild(col);
+            document.getElementById("container").appendChild(row[1]);
+            
+
+          }else{
+            for(var counter = 0; counter < 4; counter++){
+              var col = document.createElement("div")
+              col.className = "col-md-6"
+              buttons[counter] = document.createElement("button");
+              buttons[counter].id = triv[counter+1][0]
+              buttons[counter].innerHTML = triv[counter+1][1].toString()
+              buttons[counter].value = triv[counter+1][2]
+              buttons[counter].className = "btn btn-info"
+              if(buttons[counter].value == 'true'){
+                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),test_function(this, triv)}
+              }else{
+                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger')}
+              }
+              col.appendChild(buttons[counter])
+              if(counter < 2){
+                row[0].appendChild(col);
+              }else{
+                row[1].appendChild(col);
+              }
+
+            }
+          
+            var html = 
+            `
+            <div class="row">
+            <h2 id="${triv[0][0]}">${triv[0][1]}</h2>
+            </div>`
+
+              document.getElementById("container").innerHTML = html;
+              document.getElementById("container").appendChild(row[0])
+              document.getElementById("container").appendChild(row[1])
+              // i=i+3
+          }
 
         }
       }

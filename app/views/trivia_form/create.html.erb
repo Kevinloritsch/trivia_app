@@ -293,7 +293,7 @@ if(isNaN(counter)){
   <div class="row">
     <div class="col-md-12">
       <label>Question</label>
-      <input name="question<%= JSON.parse(params["everything"])[index][0][-1]%>" type="text" class="form-control" placeholder="Question" value=<%= JSON.parse(params["everything"])[index][1]%>>
+      <input name="question<%= JSON.parse(params["everything"])[index][0][-1]%>" type="text" class="form-control" placeholder="Question" value="<%= JSON.parse(params["everything"])[index][1].to_s %>">
     </div>
     </div>
     <div class="row" style="padding-bottom: 15px">
