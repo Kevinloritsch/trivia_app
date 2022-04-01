@@ -1,170 +1,4 @@
-<script>
-var counter = parseInt('<%= params["question_length"] %>');
-if(isNaN(counter)){
-  counter = 0;
-}
-  var click = true;
-  function create_mutiplechoice() {
-    counter++;
-    var mutiple_choice = document.createElement("div");
-    mutiple_choice.id = `mutiplechoice${counter}`;
-    mutiple_choice.setAttribute("onmouseover",`document.getElementById("trashbin${counter}").style.display = 'block'`);
-    mutiple_choice.setAttribute("onmouseout",`document.getElementById("trashbin${counter}").style.display = 'none'`);
-    mutiple_choice.innerHTML = `
-    <div class="row">
-    <div class="col-md-1 col-md-offset-11">
-      <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-      </svg>
-      </div>
-    </div>
-  </div>
 
-
-  <div class="row">
-    <div class="col-md-12">
-      <label>Question</label>
-      <input name="question${counter}" type="text" class="form-control" placeholder="Question">
-    </div>
-    </div>
-    <div class="row" style="padding-bottom: 15px">
-    <div class="col-md-6">
-      <div class="input-group">
-        <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-        </span>
-        <input name="answera${counter}" type="text" class="form-control" placeholder="A.">
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="input-group">
-        <input name="answerb${counter}" type="text" class="form-control" placeholder="B.">
-        <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-        </span>
-      </div>
-    </div>
-  </div>
-      <div class="row" style="padding-bottom: 15px">
-  <div class="col-md-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-      <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-      </span>
-      <input name="answerc${counter}" type="text" class="form-control" placeholder="C.">
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="input-group">
-      <input name="answerd${counter}" type="text" class="form-control" placeholder="D.">
-      <span class="input-group-btn">
-        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-    `
-    var row = document.getElementById("questionsrow");
-    row.appendChild(mutiple_choice);
-  }
-  function create_frq(){
-    counter++;
-    var frq = document.createElement("div");
-    frq.id = `frq${counter}`
-    frq.setAttribute("onmouseover",`document.getElementById("trashbin${counter}").style.display = 'block'`);
-    frq.setAttribute("onmouseout",`document.getElementById("trashbin${counter}").style.display = 'none'`);
-    frq.innerHTML = 
-    `
-    <div class="row">
-  <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-    </svg>
-    </div>
-  </div>
-</div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label>Question</label>
-        <input name="frqquestion${counter}" type="text" class="form-control" placeholder="Question">
-      </div>
-      <div class="col-md-6">
-        <label>Answer</label>
-        <input name="frqanswer${counter}" type="text" class="form-control" placeholder="Answer">
-      </div>
-    </div>
-`;
-    var row = document.getElementById("questionsrow");
-    row.appendChild(frq);
-    // frq_counter++;
-  }
-  function destroy(node){
-    var parent = node;
-
-    while(!(parent.id.includes("mutiplechoice") || parent.id.includes("frq"))){
-      parent = parent.parentNode;
-    }
-    parent.remove();
-  }
-  function submit_url(){
-    return window.location.href + "/submit"
-  }
-  function highlight(node){
-    var parent = node;
-    if(node.getAttribute("class").includes("info")){
-      node.setAttribute("class", "btn btn-default")
-      while(!parent.getAttribute("class").includes("col-md")){
-        parent = parent.parentNode
-      }
-      child = parent
-      for(var i = 0 ; i  < child.childNodes.length; i++){
-        
-        if(child.childNodes[i].tagName != undefined){
-          var new_child = child.childNodes[i];
-          for(var i = 0; i < new_child.childNodes.length; i++){
-            if(new_child.childNodes[i].tagName == 'INPUT'){
-              console.log(new_child.childNodes[i].getAttribute("name"))
-              if(!new_child.childNodes[i].getAttribute("name").includes(",")){
-                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name") + ", 1")
-              }else{
-                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name").replace(", 0", ", 1"))
-              }
-            }
-          }
-
-        }
-      }
-    }else if(node.getAttribute("class").includes("default")){
-      node.setAttribute("class", "btn btn-info")
-      while(!parent.getAttribute("class").includes("col-md")){
-        parent = parent.parentNode
-      }
-      child = parent
-      for(var i = 0 ; i  < child.childNodes.length; i++){
-        
-        if(child.childNodes[i].tagName != undefined){
-          var new_child = child.childNodes[i];
-          for(var i = 0; i < new_child.childNodes.length; i++){
-            if(new_child.childNodes[i].tagName == 'INPUT'){
-              console.log(new_child.childNodes[i].getAttribute("name"))
-              if(!new_child.childNodes[i].getAttribute("name").includes(",")){
-                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name") + ", 0")
-              }else{
-                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name").replace(", 1", ", 0"))
-              }
-            }
-          }
-
-        }
-      }
-    }
-  }
-</script>
 <div class="center jumbotron" style="height: 600px;">
 
 <h1>Edit Trivia Game</h1>
@@ -422,3 +256,168 @@ if(isNaN(counter)){
 </div>
 </form>
 </div>
+<script>
+  var counter = (document.getElementsByClassName("row").length-1) /2;
+  console.log(counter);
+  var click = true;
+  function create_mutiplechoice() {
+    counter++;
+    var mutiple_choice = document.createElement("div");
+    mutiple_choice.id = `mutiplechoice${counter}`;
+    mutiple_choice.setAttribute("onmouseover",`document.getElementById("trashbin${counter}").style.display = 'block'`);
+    mutiple_choice.setAttribute("onmouseout",`document.getElementById("trashbin${counter}").style.display = 'none'`);
+    mutiple_choice.innerHTML = `
+    <div class="row">
+    <div class="col-md-1 col-md-offset-11">
+      <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+      </svg>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <label>Question</label>
+      <input name="question${counter}" type="text" class="form-control" placeholder="Question">
+    </div>
+    </div>
+    <div class="row" style="padding-bottom: 15px">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+        </span>
+        <input name="answera${counter}" type="text" class="form-control" placeholder="A.">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group">
+        <input name="answerb${counter}" type="text" class="form-control" placeholder="B.">
+        <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+        </span>
+      </div>
+    </div>
+  </div>
+      <div class="row" style="padding-bottom: 15px">
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+      <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+      </span>
+      <input name="answerc${counter}" type="text" class="form-control" placeholder="C.">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <input name="answerd${counter}" type="text" class="form-control" placeholder="D.">
+      <span class="input-group-btn">
+        <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+    `
+    var row = document.getElementById("questionsrow");
+    row.appendChild(mutiple_choice);
+  }
+  function create_frq(){
+    counter++;
+    var frq = document.createElement("div");
+    frq.id = `frq${counter}`
+    frq.setAttribute("onmouseover",`document.getElementById("trashbin${counter}").style.display = 'block'`);
+    frq.setAttribute("onmouseout",`document.getElementById("trashbin${counter}").style.display = 'none'`);
+    frq.innerHTML = 
+    `
+    <div class="row">
+  <div class="col-md-1 col-md-offset-11">
+    <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+    </svg>
+    </div>
+  </div>
+</div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label>Question</label>
+        <input name="frqquestion${counter}" type="text" class="form-control" placeholder="Question">
+      </div>
+      <div class="col-md-6">
+        <label>Answer</label>
+        <input name="frqanswer${counter}" type="text" class="form-control" placeholder="Answer">
+      </div>
+    </div>
+`;
+    var row = document.getElementById("questionsrow");
+    row.appendChild(frq);
+    // frq_counter++;
+  }
+  function destroy(node){
+    var parent = node;
+
+    while(!(parent.id.includes("mutiplechoice") || parent.id.includes("frq"))){
+      parent = parent.parentNode;
+    }
+    parent.remove();
+  }
+  function submit_url(){
+    return window.location.href + "/submit"
+  }
+  function highlight(node){
+    var parent = node;
+    if(node.getAttribute("class").includes("info")){
+      node.setAttribute("class", "btn btn-default")
+      while(!parent.getAttribute("class").includes("col-md")){
+        parent = parent.parentNode
+      }
+      child = parent
+      for(var i = 0 ; i  < child.childNodes.length; i++){
+        
+        if(child.childNodes[i].tagName != undefined){
+          var new_child = child.childNodes[i];
+          for(var i = 0; i < new_child.childNodes.length; i++){
+            if(new_child.childNodes[i].tagName == 'INPUT'){
+              console.log(new_child.childNodes[i].getAttribute("name"))
+              if(!new_child.childNodes[i].getAttribute("name").includes(",")){
+                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name") + ", 1")
+              }else{
+                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name").replace(", 0", ", 1"))
+              }
+            }
+          }
+
+        }
+      }
+    }else if(node.getAttribute("class").includes("default")){
+      node.setAttribute("class", "btn btn-info")
+      while(!parent.getAttribute("class").includes("col-md")){
+        parent = parent.parentNode
+      }
+      child = parent
+      for(var i = 0 ; i  < child.childNodes.length; i++){
+        
+        if(child.childNodes[i].tagName != undefined){
+          var new_child = child.childNodes[i];
+          for(var i = 0; i < new_child.childNodes.length; i++){
+            if(new_child.childNodes[i].tagName == 'INPUT'){
+              console.log(new_child.childNodes[i].getAttribute("name"))
+              if(!new_child.childNodes[i].getAttribute("name").includes(",")){
+                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name") + ", 0")
+              }else{
+                new_child.childNodes[i].setAttribute("name", new_child.childNodes[i].getAttribute("name").replace(", 1", ", 0"))
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+</script>

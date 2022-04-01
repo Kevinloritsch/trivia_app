@@ -11,6 +11,7 @@ end
   def trivia_form
   end
   def submit
+    # puts(params);
     @inputs = params
     answer = Array.new
     @everything = Array.new

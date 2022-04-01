@@ -26,7 +26,7 @@ function test_function(button, triv){
     for(var i = 0; i < triv.length; i++){
         if(triv[i][0].indexOf(index) != -1){
             if(triv[i][0].includes("frq")){
-                var input = document.getElementsByName(triv[i][0].toString())[0]
+                var input = document.getElementsByTagName("input")[0]
                 if(input.value.toLowerCase() == triv[i+1][1].toLowerCase()){
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-success has-feedback form-group row")
                 }else{
@@ -35,13 +35,17 @@ function test_function(button, triv){
                 setTimeout(function(){
                     document.getElementById("container").innerHTML = '';
                     var row = [];
+                    row[0] = document.createElement("div")
+                    row[0].className = "form-group row"
+                    row[1] = document.createElement("div")
+                    row[1].className = "row"
                     // console.log(triv[i])
                     if(triv[i+2][0].includes("frq")){
                         row[0].innerHTML = `<div class="col"><input name="${triv[i+3][0]}" type="text" class="form-control"></div>`
                         var html = 
                         `
                         <div class="row">
-                        <h2 id="${triv[i+3][0]}">${triv[i+3][1]}</h2>
+                        <h2 id="${triv[i+2][0]}">${triv[i+2][1]}</h2>
                         </div>`
                         var col = document.createElement("div")
                         col.className = "col-md-1 col-md-offset-11";
@@ -131,9 +135,9 @@ function test_function(button, triv){
                             var col = document.createElement("div")
                             col.className = "col-md-6"
                             buttons[counter] = document.createElement("button");
-                            buttons[counter].id = triv[counter+i+5][0]
-                            buttons[counter].innerHTML = triv[counter+i+5][1].toString()
-                            buttons[counter].value = triv[counter+i+5][2]
+                            buttons[counter].id = triv[counter+i+6][0]
+                            buttons[counter].innerHTML = triv[counter+i+6][1].toString()
+                            buttons[counter].value = triv[counter+i+6][2]
                             buttons[counter].className = "btn btn-info"
                             if(buttons[counter].value == 'true'){
                                 buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),test_function(this, triv)}
@@ -150,7 +154,7 @@ function test_function(button, triv){
                         }
                         var html = `
                         <div class="row">
-                        <h2 id="${triv[i+2][0]}">${triv[i+2][1]}</h2>
+                        <h2 id="${triv[i+5][0]}">${triv[i+5][1]}</h2>
                         </div>`
 
                         document.getElementById("container").innerHTML = html;
