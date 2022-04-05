@@ -92,9 +92,9 @@ document.addEventListener('turbolinks:load', ()=> {
               buttons[counter].value = triv[counter+1][2]
               buttons[counter].className = "btn btn-info"
               if(buttons[counter].value == 'true'){
-                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),test_function(this, triv)}
+                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),console.log(right++),test_function(this, triv)}
               }else{
-                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger')}
+                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),console.log(wrong++)}
               }
               col.appendChild(buttons[counter])
               if(counter < 2){
