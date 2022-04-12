@@ -44,8 +44,24 @@ function test_function(button, triv){
                     row[1] = document.createElement("div")
                     row[1].className = "row"
                     if(triv[i+2] === undefined){
-                        console.log(undefined)
-                        // break;
+                        var container = document.getElementById("container")
+                        container.innerHTML = '';
+                        var correct = document.createElement("h2")
+                        correct.innerText = "Right: " + (right-wrong)
+                        var incorrect = document.createElement("h2")
+                        incorrect.innerText = "Wrong: " + wrong
+                        var row = document.createElement("div")
+                        row.className = 'row'
+                        var cols = []
+                        cols[0] = document.createElement("div")
+                        cols[0].className = "col-md-6"
+                        cols[1] = document.createElement("div")
+                        cols[1].className = "col-md-6"
+                        cols[0].appendChild(correct)
+                        cols[1].appendChild(incorrect)
+                        row.appendChild(cols[0])
+                        row.appendChild(cols[1])
+                        container.appendChild(row);
                     }else if(triv[i+2][0].includes("frq")){
                         row[0].innerHTML = `<div class="col"><input name="${triv[i+3][0]}" type="text" class="form-control"></div>`
                         var html = 
