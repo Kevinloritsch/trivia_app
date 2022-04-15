@@ -41,9 +41,9 @@ function test_function(button, triv){
                         var container = document.getElementById("container")
                         container.innerHTML = '';
                         var correct = document.createElement("h2")
-                        correct.innerText = "Right: " + (right-wrong)
+                        correct.innerText = "Right: " + (right-(wrong*(1/3)))
                         var incorrect = document.createElement("h2")
-                        incorrect.innerText = "Wrong: " + wrong
+                        incorrect.innerText = "Wrong: " + (wrong*(1/3))
                         var row = document.createElement("div")
                         row.className = 'row'
                         var cols = []

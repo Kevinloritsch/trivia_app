@@ -21,7 +21,11 @@
         </tr>
         <% for trivia_game in @trivia_games %>
             <tr>
+            <% if trivia_game.title.length < 45 %>
             <td class="active"><%=trivia_game.title%></td>
+            <% else %>
+            <td class="active"><%=trivia_game.title[0...45]%>...</td>
+            <% end %>
             <td class="active"><%=trivia_game.created_at%></td>
             <td style="color: black" class="active" onmouseover="this.style.color='orange'" onmouseout="this.style.color='black'">
             <%= link_to '<svg style="width: 25%"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -47,7 +51,7 @@
     var counter = 0;
     if(counter == 0){
     for(var i = 0; i < tag_hrefs.length; i++){
-        if(String(tag_hrefs[i]).includes("trivia_games")){
+        if(tag_hrefs[i].toString().includes("trivia_games")){
             var innerhtml  = $(tag_hrefs[i].innerText)[0];
             tag_hrefs[i].innerHTML = ""
             tag_hrefs[i].appendChild(innerhtml)
