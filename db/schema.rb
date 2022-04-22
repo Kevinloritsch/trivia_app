@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2022_01_21_164529) do
 
+  create_table "Rooms", force: :cascade do |t|
+    t.string "session"
+    t.string "message"
+    t.string "author"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "players"
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.integer "user_id", null: false
@@ -21,12 +30,10 @@ ActiveRecord::Schema.define(version: 2022_01_21_164529) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.string "session"
-    t.string "author"
+  create_table "notes", force: :cascade do |t|
+    t.text "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "players"
   end
 
   create_table "trivia_games", force: :cascade do |t|
