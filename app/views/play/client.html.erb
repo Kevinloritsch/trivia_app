@@ -16,17 +16,22 @@
 <script>
 var right = 0;
 var wrong = 0;
-function test_function(button, triv){
+function test_function(button, triv, roomChannel){
+    // roomChannel.send({message: "Deez nuts"})
     var index = button.parentElement.parentElement.parentElement.children[0].children[0].id
     var container = button.parentElement.parentElement.parentElement;
+    roomChannel.send({message: "Correct: " + right})
+    roomChannel.send({message: "Incorrect: " + wrong})
     for(var i = 0; i < triv.length; i++){
         if(triv[i][0].indexOf(index) != -1){
             if(triv[i][0].includes("frq")){
                 var input = document.getElementsByTagName("input")[0]
                 if(input.value.toLowerCase() == triv[i+1][1].toLowerCase()){
+                    roomChannel.send({correct: "This user has gotten it correct"})
                     right++
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-success has-feedback form-group row")
                 }else{
+                    roomChannel.send({correct: "This user has gotten it incorrect"})
                     wrong++
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-error has-feedback form-group row")
                 }
@@ -68,7 +73,7 @@ function test_function(button, triv){
                         var button = document.createElement("button");
                         button.className = "btn btn-info"
                         button.innerText = "Submit"
-                        button.onclick = function(){test_function(this, triv)}
+                        button.onclick = function(){test_function(this, triv, roomChannel)}
                         document.getElementById("container").innerHTML = html;
                         document.getElementById("container").appendChild(row[0])
                         col.appendChild(button);
@@ -89,8 +94,9 @@ function test_function(button, triv){
                             buttons[counter].value = triv[counter+i+3][2]
                             buttons[counter].className = "btn btn-info"
                             if(buttons[counter].value == 'true'){
-                                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),right++,test_function(this, triv)}
+                                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),right++,test_function(this, triv, roomChannel)}
                             }else{
+                                roomChannel.send({incorrect: "This user has gotten it incorrect"})
                                 buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),wrong++}
                             }
                             col.appendChild(buttons[counter])
@@ -154,7 +160,7 @@ function test_function(button, triv){
                         var button = document.createElement("button");
                         button.className = "btn btn-info"
                         button.innerText = "Submit"
-                        button.onclick = function(){test_function(this, triv)}
+                        button.onclick = function(){test_function(this, triv, roomChannel)}
                         document.getElementById("container").innerHTML = html;
                         document.getElementById("container").appendChild(row[0])
                         col.appendChild(button);
@@ -177,7 +183,7 @@ function test_function(button, triv){
                             buttons[counter].value = triv[counter+i+6][2]
                             buttons[counter].className = "btn btn-info"
                             if(buttons[counter].value == 'true'){
-                                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),right++,test_function(this, triv)}
+                                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),right++,test_function(this, triv, roomChannel)}
                             }else{
                                 buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),wrong++}
                             }

@@ -22,21 +22,33 @@
 <script>
 var right = 0;
 var wrong = 0;
-function barGraph(){
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-            var yValues = [55, 49, 44, 24, 15];
-            var barColors = ["red", "green","blue","orange","brown"];
+function barGraph(players, correct){
+    var xValues = [];
+    console.log(players);
+    for(var i = 0; i < players.children.length; i++){
+        xValues.push(players.children[i].innerText)
+    }
+    var yValues = [5];
+    var barColors = ["green", "green","blue","orange","brown"];
 
-            new Chart(document.getElementById("myChart"), {
-              type: "bar",
-              data: {
-                labels: xValues,
-                datasets: [{
-                  backgroundColor: barColors,
-                  data: yValues
-                }]
-              },
-              options: {}
+    new Chart(document.getElementById("myChart"), {
+        type: "bar",
+        data: {
+        labels: xValues,
+        datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+        }]
+        },
+        options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
     });
 }
 function test_function(button, triv){

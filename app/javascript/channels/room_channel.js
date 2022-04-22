@@ -27,11 +27,15 @@ document.addEventListener('turbolinks:load', ()=> {
       },
     
       received(data) {
+        var players = document.getElementById("players")
         // Called when there's incoming data on the websocket for this channel
         if(data.message != undefined){
           console.log("Incoming Data: " + data.message.toString());
+          var chart = document.getElementById("myChart");
+          barGraph(chart.data.labels, data.message[data.message.length-1])
+          chart.update();
         }else if(data.player != undefined){
-          var players = document.getElementById("players");
+          players = document.getElementById("players");
           var boolean = true;
           for(var i = 0; i < players.children.length; i++){
             if(players.children[i].innerText.toString() == data.player){
@@ -45,7 +49,7 @@ document.addEventListener('turbolinks:load', ()=> {
           }
         }else if(data.delete != undefined){
           // console.log("Delete Data:"+ data.delete)
-          var players = document.getElementById("players")
+            players = document.getElementById("players")
           for(var i= 0; i < players.children.length; i++){
             if(players.children[i].innerText == data.delete){
               players.children[i].remove()
@@ -53,13 +57,14 @@ document.addEventListener('turbolinks:load', ()=> {
             }
           }
         }else if(data.trivia_game != undefined){
+          players = document.getElementById("players")
           document.getElementById("container1").remove();
           if(player == undefined){
             var canvas = document.createElement("canvas");
             canvas.id = "myChart"
             canvas.style = "width:100%;max-width:700px"
             document.getElementById("container").append(canvas)
-            barGraph();
+            barGraph(players);
           }else{
             var triv  = JSON.parse(data.trivia_game.toString())
             var buttons = [];
@@ -81,7 +86,7 @@ document.addEventListener('turbolinks:load', ()=> {
               var button = document.createElement("button");
               button.className = "btn btn-info"
               button.innerText = "Submit"
-              button.onclick = function(){test_function(this, triv)}
+              button.onclick = function(){test_function(this, triv, roomChannel)}
               document.getElementById("container").innerHTML = html;
               document.getElementById("container").appendChild(row[0])
               col.appendChild(button);
@@ -99,9 +104,9 @@ document.addEventListener('turbolinks:load', ()=> {
                 buttons[counter].value = triv[counter+1][2]
                 buttons[counter].className = "btn btn-info"
                 if(buttons[counter].value == 'true'){
-                  buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),console.log(right++),test_function(this, triv)}
+                  buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),right++,test_function(this, triv, roomChannel)}
                 }else{
-                  buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),console.log(wrong++)}
+                  buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),wrong++}
                 }
                 col.appendChild(buttons[counter])
                 if(counter < 2){
