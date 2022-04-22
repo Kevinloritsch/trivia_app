@@ -2,6 +2,10 @@
 
 <script type="module">
 import * as THREE from 'https://cdn.skypack.dev/three@@0.136.0';
+import { TextGeometry } from 'https://cdn.skypack.dev/three@@0.136.0/examples/jsm/geometries/TextGeometry.js'
+import { FontLoader } from 'https://cdn.skypack.dev/three@@0.136.0/examples/jsm/loaders/FontLoader.js'
+
+
 
   // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -22,6 +26,29 @@ scene.add(mesh1)
 // Light
 const ambientLight = new THREE.AmbientLight('#ffffff', .6)
 scene.add(ambientLight)
+
+const loader = new FontLoader();
+const textMaterial = new THREE.MeshBasicMaterial()
+
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+	const nameTextGeometry = new TextGeometry(
+            `?`,
+            {
+                font: font,
+                size: 2.7,
+                height: 0.2,
+                curveSegments: 20,
+                bevelEnabled: false
+            }
+        )
+        nameTextGeometry.rotateX(Math.PI * 2 * .9)
+        nameTextGeometry.center()
+        nameTextGeometry.translate(0, 3, 2)
+        nameText = new THREE.Mesh(nameTextGeometry, textMaterial)
+        console.log(nameText)
+        scene.add(nameText)
+} );
 
 
 /**
