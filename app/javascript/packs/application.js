@@ -9,6 +9,8 @@
 //= require turbolinks
 //= require_tree .
 //= require trivia_form
+//= require Chart
+
 
 
 import Rails from "@rails/ujs"

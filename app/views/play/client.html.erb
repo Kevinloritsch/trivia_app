@@ -20,8 +20,6 @@ function test_function(button, triv, roomChannel){
     // roomChannel.send({message: "Deez nuts"})
     var index = button.parentElement.parentElement.parentElement.children[0].children[0].id
     var container = button.parentElement.parentElement.parentElement;
-    roomChannel.send({message: "Correct: " + right})
-    roomChannel.send({message: "Incorrect: " + wrong})
     for(var i = 0; i < triv.length; i++){
         if(triv[i][0].indexOf(index) != -1){
             if(triv[i][0].includes("frq")){
@@ -209,5 +207,6 @@ function test_function(button, triv, roomChannel){
             }
         }
     }
+    roomChannel.send({message: [right, wrong]})
 }
 </script>

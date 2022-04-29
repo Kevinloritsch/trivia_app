@@ -22,31 +22,42 @@
 <script>
 var right = 0;
 var wrong = 0;
-function barGraph(players, correct){
-    var xValues = [];
-    console.log(players);
+
+function barGraph(players, correct, incorrect,number_questions){
+    var xValues =[];
     for(var i = 0; i < players.children.length; i++){
-        xValues.push(players.children[i].innerText)
+        xValues[i] = (players.children[i].innerText)
     }
-    var yValues = [5];
-    var barColors = ["green", "green","blue","orange","brown"];
+    var yValues = [correct];
 
     new Chart(document.getElementById("myChart"), {
         type: "bar",
         data: {
         labels: xValues,
-        datasets: [{
-            backgroundColor: barColors,
-            data: yValues
-        }]
+        datasets: [
+            {
+            label: "Correct",
+            backgroundColor: "green",
+            data: [correct]
+            },
+            {
+            label: "Incorrect",
+            backgroundColor: "red",
+            data: [incorrect]
+            // beginAtZero: true
+            }
+        ]
         },
         options: {
         scales: {
             yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+            display: true,
+            stacked: false,
+            ticks: {
+                min: 0, // minimum value
+                max: number_questions // maximum value
+            }
+        }]
         }
     }
     });

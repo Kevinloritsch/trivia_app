@@ -3,6 +3,8 @@ import consumer from "./consumer"
 var roomChannel;
 var room_id;
 var player;
+var trivia = 0;
+var players;
 document.addEventListener('turbolinks:load', ()=> {
   if(document.getElementById("gamesession") != null){
       room_id = document.getElementById('gamesession').innerText
@@ -27,15 +29,23 @@ document.addEventListener('turbolinks:load', ()=> {
       },
     
       received(data) {
-        var players = document.getElementById("players")
+        if(document.getElementById("players") === undefined || document.getElementById("players") === null){
+        }else{
+          players = document.getElementById("players")
+        }
         // Called when there's incoming data on the websocket for this channel
         if(data.message != undefined){
-          console.log("Incoming Data: " + data.message.toString());
-          var chart = document.getElementById("myChart");
-          barGraph(chart.data.labels, data.message[data.message.length-1])
-          chart.update();
+          // console.log("Incoming Data: " + data.message.toString())
+            if(location.pathname.includes("host")){
+              document.getElementById("container").innerHTML = ""
+              // console.log(typeof(data.message))
+              var canvas = document.createElement("canvas");
+              canvas.id = "myChart"
+              canvas.style = "width:100%;max-width:700px"
+              document.getElementById("container").append(canvas)
+              barGraph(players, JSON.parse(data.message)[0], JSON.parse(data.message)[1],trivia)
+          }
         }else if(data.player != undefined){
-          players = document.getElementById("players");
           var boolean = true;
           for(var i = 0; i < players.children.length; i++){
             if(players.children[i].innerText.toString() == data.player){
@@ -49,7 +59,6 @@ document.addEventListener('turbolinks:load', ()=> {
           }
         }else if(data.delete != undefined){
           // console.log("Delete Data:"+ data.delete)
-            players = document.getElementById("players")
           for(var i= 0; i < players.children.length; i++){
             if(players.children[i].innerText == data.delete){
               players.children[i].remove()
@@ -57,14 +66,18 @@ document.addEventListener('turbolinks:load', ()=> {
             }
           }
         }else if(data.trivia_game != undefined){
-          players = document.getElementById("players")
+          for(var i = 0; i < JSON.parse(data.trivia_game).length; i++){
+            if(JSON.parse(data.trivia_game)[i][0].includes("question")){
+              trivia++;
+            }
+          }
           document.getElementById("container1").remove();
           if(player == undefined){
             var canvas = document.createElement("canvas");
             canvas.id = "myChart"
             canvas.style = "width:100%;max-width:700px"
             document.getElementById("container").append(canvas)
-            barGraph(players);
+            barGraph(players, 0,0,trivia);
           }else{
             var triv  = JSON.parse(data.trivia_game.toString())
             var buttons = [];
