@@ -43,7 +43,7 @@ document.addEventListener('turbolinks:load', ()=> {
               canvas.id = "myChart"
               canvas.style = "width:100%;max-width:700px"
               document.getElementById("container").append(canvas)
-              barGraph(players, JSON.parse(data.message)[0], JSON.parse(data.message)[1],trivia)
+              barGraph(players, JSON.parse(data.message)[0], JSON.parse(data.message)[1],trivia, JSON.parse(data.message)[2])
           }
         }else if(data.player != undefined){
           var boolean = true;
@@ -77,7 +77,7 @@ document.addEventListener('turbolinks:load', ()=> {
             canvas.id = "myChart"
             canvas.style = "width:100%;max-width:700px"
             document.getElementById("container").append(canvas)
-            barGraph(players, 0,0,trivia);
+            barGraph(players, null,null,trivia, null);
           }else{
             var triv  = JSON.parse(data.trivia_game.toString())
             var buttons = [];

@@ -1,3 +1,4 @@
+<p id="client" style="display: hidden"><%= User.find(params["current_user"].to_i).name %></p>
 <div id="container">
 <div id="container1">
 <h2>Host <%= User.find_by(:email=>Room.find_by(:session=>params["gamesession"]).author).name%></h2>
@@ -10,8 +11,8 @@
 <% end %>
 <% end %>
 </div>
-<p id="player" style="display: hidden"><%= params["current_user"] %></p>
 </div>
+<p id="player" style="display: hidden"><%= params["current_user"] %></p>
 </div>
 <script>
 var right = 0;
@@ -207,6 +208,6 @@ function test_function(button, triv, roomChannel){
             }
         }
     }
-    roomChannel.send({message: [right, wrong]})
+    roomChannel.send({message: [right, wrong,document.getElementById("client").innerText]})
 }
 </script>

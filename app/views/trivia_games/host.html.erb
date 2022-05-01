@@ -22,13 +22,31 @@
 <script>
 var right = 0;
 var wrong = 0;
-
-function barGraph(players, correct, incorrect,number_questions){
+var yValues_correct = [];
+var yValues_incorrect = [];
+function barGraph(players, correct, incorrect,number_questions, client){
     var xValues =[];
     for(var i = 0; i < players.children.length; i++){
         xValues[i] = (players.children[i].innerText)
     }
-    var yValues = [correct];
+    if(correct === null && incorrect === null){
+        for(var i = 0; i < xValues.length; i++){
+            yValues_correct[i] = 0
+            yValues_incorrect[i] = 0;
+        }
+    }
+    if(client === null){
+
+    }else{
+        for(var i = 0; i < xValues.length; i++){
+            if(xValues[i] == client){
+                yValues_correct[i] = correct
+                yValues_incorrect[i] = incorrect
+            }
+        }
+    }
+    // console.log("Y correct:"+yValues_correct)
+    // console.log("Y incorrect:"+yValues_incorrect)
 
     new Chart(document.getElementById("myChart"), {
         type: "bar",
@@ -38,12 +56,12 @@ function barGraph(players, correct, incorrect,number_questions){
             {
             label: "Correct",
             backgroundColor: "green",
-            data: [correct]
+            data: yValues_correct
             },
             {
             label: "Incorrect",
             backgroundColor: "red",
-            data: [incorrect]
+            data: yValues_incorrect
             // beginAtZero: true
             }
         ]
