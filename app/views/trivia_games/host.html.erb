@@ -40,8 +40,8 @@ function barGraph(players, correct, incorrect,number_questions, client){
     }else{
         for(var i = 0; i < xValues.length; i++){
             if(xValues[i] == client){
-                yValues_correct[i] = correct
-                yValues_incorrect[i] = incorrect
+                yValues_incorrect[i] = incorrect/3
+                yValues_correct[i] = correct - yValues_incorrect[i]
             }
         }
     }
