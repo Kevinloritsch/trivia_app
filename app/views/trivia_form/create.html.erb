@@ -105,10 +105,39 @@ if(isNaN(counter)){
   }
   function destroy(node){
     var parent = node;
-
+    var this_index = parseInt(parent.parentElement.parentElement.parentElement.id[parent.parentElement.parentElement.parentElement.id.length-1])
+    var container = node.parentElement.parentElement.parentElement.parentElement;
+    for(var i = 0; i < container.children.length; i++){
+      if(container.children[i].id.includes("mutiplechoice") || container.children[i].id.includes("frq")){
+        // console.log(container.children[i].children[2])
+        if(i > this_index){
+          var new_index = container.children[i].id[container.children[i].id.length-1]-1
+          container.children[i].children[1].children[0].children[1].setAttribute("name", `question${new_index}`)
+          container.children[i].children[2].children[0].children[0].children[1].setAttribute('name', `answera${new_index}`)
+          container.children[i].children[2].children[1].children[0].children[0].setAttribute('name', `answerb${new_index}`)
+          container.children[i].children[3].children[0].children[0].children[1].setAttribute('name', `answerc${new_index}`)
+          container.children[i].children[3].children[1].children[0].children[1].setAttribute('name', `answerd${new_index}`)
+          // container.children[i].children[2].children[1].children[0].setAttribute("name", `answerc${new_index}`)
+          // container.children[i].children[2].children[1].children[1].setAttribute("name", `answerd${new_index}`)
+          container.children[i].id = container.children[i].id.substring(0,container.children[i].id.length-1)+(new_index).toString()
+          var trashbin = document.getElementById(`trashbin${(new_index+1).toString()}`)
+          if(new_index == 0){
+            new_index = ""
+          }
+          trashbin.id = `trashbin${new_index}`
+          trashbin.setAttribute("onmouseover",`this.style.color = 'orange'`)
+          trashbin.setAttribute("onmouseout",`this.style.color = 'black'`)
+          container.children[i].setAttribute("onmouseover",`document.getElementById("trashbin${new_index}").style.display = 'block'`)
+          container.children[i].setAttribute("onmouseout",`document.getElementById("trashbin${new_index}").style.display = 'none'`)
+        }
+      }else{
+        this_index = this_index +1;
+      }
+    }
     while(!(parent.id.includes("mutiplechoice") || parent.id.includes("frq"))){
       parent = parent.parentNode;
     }
+    counter = counter - 1;
     parent.remove();
   }
   function highlight(node){
@@ -120,7 +149,6 @@ if(isNaN(counter)){
       }
       child = parent
       for(var i = 0 ; i  < child.childNodes.length; i++){
-        
         if(child.childNodes[i].tagName != undefined){
           var new_child = child.childNodes[i];
           for(var i = 0; i < new_child.childNodes.length; i++){
@@ -248,18 +276,6 @@ if(isNaN(counter)){
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 </div>
-  <div id="frq0" style="display:none">
-    <div class="row">
-      <div class="col-md-6">
-        <label>Question</label>
-        <input type="text" class="form-control" placeholder="Question">
-      </div>
-      <div class="col-md-6">
-        <label>Answer</label>
-        <input type="text" class="form-control" placeholder="Answer">
-      </div>
-    </div>
-  </div>
 </div>
 <% else %>
 <div class="myBox">
@@ -278,7 +294,6 @@ if(isNaN(counter)){
 <% end %>
   <% for index in 0..(JSON.parse(params["everything"]).length-1) %>
     <% if JSON.parse(params["everything"])[index][0].include?("question") and !JSON.parse(params["everything"])[index][0].include?("frq") %>
-      <div class="container" id="questionsrow">
 <div id="mutiplechoice<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= index %>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index %>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
@@ -348,7 +363,6 @@ if(isNaN(counter)){
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
-</div>
 </div>
 <% index = index + 4 %>
     <% elsif JSON.parse(params["everything"])[index][0].include?("frqquestion") %>
