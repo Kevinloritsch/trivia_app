@@ -107,7 +107,6 @@ if(isNaN(counter)){
     var parent = node;
     var this_index = parseInt(parent.parentElement.parentElement.parentElement.id[parent.parentElement.parentElement.parentElement.id.length-1])
     var container = node.parentElement.parentElement.parentElement.parentElement;
-    // console.log(container);
     for(var i = 0; i < container.children.length; i++){
       if(container.children[i].id.includes("mutiplechoice")){
         if(i > this_index){
@@ -129,21 +128,23 @@ if(isNaN(counter)){
           container.children[i].setAttribute("onmouseout",`document.getElementById("trashbin${new_index}").style.display = 'none'`)
         }
       }else if(container.children[i].id.includes("frq")){
-        var new_index = parseInt(container.children[i].id[container.children[i].id.length-1])-1
-        container.children[i].id = `frq${new_index}`
-        var question = document.getElementsByName(`frqquestion${parseInt(new_index)+1}`)[0]
-        question.setAttribute("name", `frqquestion${new_index}`)
-        var answer = document.getElementsByName(`frqanswer${parseInt(new_index)+1}`)[0]
-        answer.setAttribute("name", `frqanswer${new_index}`)
-        var trashbin = document.getElementById(`trashbin${(new_index+1).toString()}`)
-          if(new_index == 0){
-            new_index = ""
-          }
-          trashbin.id = `trashbin${new_index}`
-          trashbin.setAttribute("onmouseover",`this.style.color = 'orange'`)
-          trashbin.setAttribute("onmouseout",`this.style.color = 'black'`)
-        container.children[i].setAttribute("onmouseover",`document.getElementById("trashbin${new_index}").style.display = 'block'`)
-        container.children[i].setAttribute("onmouseout",`document.getElementById("trashbin${new_index}").style.display = 'none'`)
+        if(i > this_index){
+          var new_index = parseInt(container.children[i].id[container.children[i].id.length-1])-1
+          container.children[i].id = `frq${new_index}`
+          var question = document.getElementsByName(`frqquestion${(parseInt(new_index)+1).toString()}`)[0]
+          question.setAttribute("name", `frqquestion${new_index}`)
+          var answer = document.getElementsByName(`frqanswer${(parseInt(new_index)+1).toString()}`)[0]
+          answer.setAttribute("name", `frqanswer${new_index}`)
+          var trashbin = document.getElementById(`trashbin${(parseInt(new_index)+1).toString()}`)
+            if(new_index == 0){
+              new_index = ""
+            }
+            trashbin.id = `trashbin${new_index}`
+            trashbin.setAttribute("onmouseover",`this.style.color = 'orange'`)
+            trashbin.setAttribute("onmouseout",`this.style.color = 'black'`)
+          container.children[i].setAttribute("onmouseover",`document.getElementById("trashbin${new_index}").style.display = 'block'`)
+          container.children[i].setAttribute("onmouseout",`document.getElementById("trashbin${new_index}").style.display = 'none'`)
+        }
       }else{
         this_index = this_index +1;
       }
