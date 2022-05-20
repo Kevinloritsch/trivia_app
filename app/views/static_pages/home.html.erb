@@ -1,142 +1,5 @@
 <body>
 
-<script type="module">
-import * as THREE from 'https://cdn.skypack.dev/three@@0.136.0';
-import { TextGeometry } from 'https://cdn.skypack.dev/three@@0.136.0/examples/jsm/geometries/TextGeometry.js'
-import { FontLoader } from 'https://cdn.skypack.dev/three@@0.136.0/examples/jsm/loaders/FontLoader.js'
-
-
-
-  // Canvas
-const canvas = document.querySelector('canvas.webgl')
-
-// Scene
-const scene = new THREE.Scene()
-
-// Material
-const material = new THREE.MeshStandardMaterial({
-    color: '#03035C',
-})
-const mesh1 = new THREE.Mesh(
-    new THREE.TorusGeometry(1, 0.4, 16, 60),
-    material
-)
-scene.add(mesh1)
-
-// Light
-const ambientLight = new THREE.AmbientLight('#ffffff', .6)
-scene.add(ambientLight)
-
-const loader = new FontLoader();
-const textMaterial = new THREE.MeshBasicMaterial()
-
-loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
-
-	const nameTextGeometry = new TextGeometry(
-            `?`,
-            {
-                font: font,
-                size: 2.7,
-                height: 0.2,
-                curveSegments: 20,
-                bevelEnabled: false
-            }
-        )
-        nameTextGeometry.rotateX(Math.PI * 2 * .9)
-        nameTextGeometry.center()
-        nameTextGeometry.translate(0, 3, 2)
-        nameText = new THREE.Mesh(nameTextGeometry, textMaterial)
-        console.log(nameText)
-        scene.add(nameText)
-} );
-
-
-/**
- * Sizes
- */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
-
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
-
-// Cursor
-const cursor = {}
-cursor.x = 0
-cursor.y = 0
-window.addEventListener('mousemove', (event) => {
-    cursor.x = event.clientX / sizes.width - 0.5
-    cursor.y = event.clientY / sizes.height - 0.5
-})
-
-/**
- * Camera
- */
-// Group
-const cameraGroup = new THREE.Group()
-scene.add(cameraGroup)
-
-// Base camera
-const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100)
-camera.position.z = 6
-cameraGroup.add(camera)
-
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    alpha: true
-})
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-/**
- * Animate
- */
-const clock = new THREE.Clock()
-let previousTime = 0
-
-const tick = () =>
-{
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - previousTime
-    previousTime = elapsedTime
-
-    //Mesh Move
-    mesh1.rotation.x = elapsedTime * 0.1
-    mesh1.rotation.y = elapsedTime * 0.12
-
-    // Camera
-    const parallaxX = cursor.x * 0.5
-    const parallaxY = -cursor.y * 0.5
-    camera.position.x += (parallaxX - camera.position.x) * 5 * deltaTime
-    camera.position.y += (parallaxY - camera.position.y) * 5 * deltaTime
-
-    // Render
-    renderer.render(scene, camera)
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
-}
-
-tick()
-
-</script>
 
 <canvas class="webgl"></canvas>
     
@@ -187,23 +50,14 @@ tick()
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
 
 
   <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"), "https://rubyonrails.org/" %>
   </div>
 
 
+  <p>&nbsp;</p>
 
 
 

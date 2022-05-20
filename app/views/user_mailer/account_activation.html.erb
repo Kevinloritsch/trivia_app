@@ -1,9 +1,12 @@
-<h1>Sample App</h1>
+<h1>Neato Trivia!</h1>
 
 <p>Hi <%= @user.name %>,</p>
 
 <p>
-Welcome to the Sample App! Click on the link below to activate your account:
+Welcome to the CV Enterprises Trivia App!
+</p>
+<p>
+Please click the link below to activate your account. If clicking the link yields an "Invalid Activation Link" error, please proceed to the Login page (top right), and login with the account previously set up.
 </p>
 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token, email: @user.email) %>
