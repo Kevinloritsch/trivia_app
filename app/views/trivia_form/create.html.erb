@@ -302,6 +302,7 @@ if(isNaN(counter)){
 <div class="myBox">
 <div class="container" id="questionsrow">
 <input type="hidden" name="authenticity_token" value="token_value">
+<div class="row">
 <% if params["title"] == nil %>
 <div class="col-md-12">
       <label>Title</label>
@@ -313,6 +314,7 @@ if(isNaN(counter)){
       <input name="title" type="text" class="form-control" value="<%=params["title"]%>">
 </div>
 <% end %>
+</div>
   <% for index in 0..(JSON.parse(params["everything"]).length-1) %>
     <% if JSON.parse(params["everything"])[index][0].include?("question") and !JSON.parse(params["everything"])[index][0].include?("frq") %>
 <div id="mutiplechoice<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= index %>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= index %>').style.display = 'none'">
