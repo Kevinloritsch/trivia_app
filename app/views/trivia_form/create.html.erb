@@ -121,7 +121,7 @@ if(isNaN(counter)){
           container.children[i].children[2].children[0].children[0].children[1].setAttribute('name', `answera${new_index}`)
           container.children[i].children[2].children[1].children[0].children[0].setAttribute('name', `answerb${new_index}`)
           container.children[i].children[3].children[0].children[0].children[1].setAttribute('name', `answerc${new_index}`)
-          container.children[i].children[3].children[1].children[0].children[1].setAttribute('name', `answerd${new_index}`)
+          container.children[i].children[3].children[1].children[0].children[0].setAttribute('name', `answerd${new_index}`)
           container.children[i].id = container.children[i].id.substring(0,container.children[i].id.length-1)+(new_index).toString()
           var trashbin = document.getElementById(`trashbin${(new_index+1).toString()}`)
           if(new_index == 0){
@@ -215,7 +215,7 @@ if(isNaN(counter)){
 <div class="center jumbotron" style="height: 600px;">
 
 <h1>Create New Trivia Game</h1>
-<form action="/submit" method="POST">
+<form action="/submit" method="POST" autocomplete="off">
 <div class="container">
   <div class="row">
       <div class="col-md-1 col-md-offset-11">

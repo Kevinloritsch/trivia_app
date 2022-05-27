@@ -34,12 +34,12 @@ end
         counter = 0;
         for input in array[index]
           if(input != false && input.blank?)
-            return index;
+            return [index,array[index]];
           end
           counter = counter + 1;
         end
       end
-      return true;
+      return [true];
     end
     def check_answer_choice(array)
       storage = Array.new
@@ -66,14 +66,14 @@ end
     def question_length(array)
       mutiple_choice_counter = 0;
       frq_counter = 0;
-      for input in array
-        if(input.to_s.include?("question") and !input.to_s.include?("frq"))
+      for count in 0..(array.length()-1)
+        if(array[count].to_s.include?("question") and !array[count].to_s.include?("frq"))
           mutiple_choice_counter = mutiple_choice_counter +1
-        elsif(input.to_s.include?("frq") and input.to_s.include?("question"))
+        elsif(array[count].to_s.include?("frq") and array[count].to_s.include?("question"))
           frq_counter = frq_counter +1;
         end
       end
-      return mutiple_choice_counter+frq_counter;
+      return [mutiple_choice_counter+frq_counter];
     end
     def get_mutiple_choice(array)
       mutiplechoice = Array.new
@@ -100,21 +100,31 @@ end
           redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"], :title => params["title"]) and return;
         end
       end
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything),:title => params["title"]) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)[0],:title => params["title"]) and return
     end
     @x = is_blank(@everything)
-    if(@x.class == Integer)
-      if(@x%5 == 0)
-        flash[:danger] = "Question " + ((@x/5)+1).to_s + " is not filled out!"
+    if(@x[0].class == Integer)
+      if(@x[1][0].include?("question"))
+        flash[:danger] = "Question "+ (@x[1][0][-1].to_i+1).to_s + " is not filled out!"
+      elsif(@x[1][0].include?("frq"))
+        flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer is not filled out!"
       else
-        flash[:danger] = "Question " + (@x/5+1).to_s + "\tAnswer " + ((@x%5)).to_s + " is not filled out!"
+        if(@x[1][0].include?("answera"))
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer A is not filled out!"
+        elsif(@x[1][0].include?("answerb"))
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer B is not filled out!"
+        elsif(@x[1][0].include?("answerc"))
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer C is not filled out!"
+        elsif(@x[1][0].include?("answerd"))
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer D is not filled out!"
+        end
       end
       for key in @inputs.keys
         if(key.include?("id"))
           redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"], :title=> params["title"]) and return;
         end
       end
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything),:title => params["title"]) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)[0],:title => params["title"]) and return
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
@@ -125,7 +135,7 @@ end
           redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"],:title => params["title"]) and return;
         end
       end
-      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything), :title=> params["title"],:title => params["title"]) and return
+      redirect_to create_path(:everything => @everything.to_s, :question_length => question_length(@everything)[0], :title=> params["title"],:title => params["title"]) and return
     end
     for key in @inputs.keys
       if(key.include?("id"))
