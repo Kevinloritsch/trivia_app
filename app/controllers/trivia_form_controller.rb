@@ -105,18 +105,18 @@ end
     @x = is_blank(@everything)
     if(@x[0].class == Integer)
       if(@x[1][0].include?("question"))
-        flash[:danger] = "Question "+ (@x[1][0][-1].to_i).to_s + " is not filled out!"
+        flash[:danger] = "Question "+ (@x[1][0][-1].to_i+1).to_s + " is not filled out!"
       elsif(@x[1][0].include?("frq"))
-        flash[:danger] = "Question " + (@x[1][0][-1].to_i).to_s + "\tAnswer is not filled out!"
+        flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer is not filled out!"
       else
         if(@x[1][0].include?("answera"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i).to_s + "\tAnswer A is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer A is not filled out!"
         elsif(@x[1][0].include?("answerb"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i).to_s + "\tAnswer B is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer B is not filled out!"
         elsif(@x[1][0].include?("answerc"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i).to_s + "\tAnswer C is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer C is not filled out!"
         elsif(@x[1][0].include?("answerd"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i).to_s + "\tAnswer D is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer D is not filled out!"
         end
       end
       for key in @inputs.keys
@@ -128,7 +128,7 @@ end
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
-      question_number = (@valid[0][-1].to_i + 1).to_s
+      question_number = (@valid[0][-1].to_i).to_s
       flash[:danger] = "Question" + question_number + " does not have an answer!"
       for key in @inputs.keys
         if(key.include?("id"))
