@@ -13,11 +13,11 @@ body {
       <div class="col-md-1 col-md-offset-11">
       <div class="dropdown">
       <button class="dropbtn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
       </svg>
     </button>
-      <div class="dropdown-content">
+      <div class="dropdown-content" style="z-index: 999;">
         <a href="javascript:void(0);" onclick="create_mutiplechoice()">Add Mutiple Choice</a>
         <a href="javascript:void(0);" onclick="create_frq()">Add FRQ</a>
       </div>
@@ -40,7 +40,7 @@ body {
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
     <div id="trashbin<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16 " height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16 " height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
     </svg>
@@ -109,11 +109,11 @@ body {
 </div>
 <% elsif JSON.parse(params["everything"])[index][0].include?("frqquestion") %>
 <div class="empty">
-<div id="frq<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%=index%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'none'">
+<div id="frq<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
     <div id="trashbin<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
     </svg>
@@ -151,7 +151,7 @@ body {
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
     <div id="trashbin<%= JSON.parse(@trivia_game.data)[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
     </svg>
@@ -223,8 +223,8 @@ body {
 <div id="frq<%= JSON.parse(@trivia_game.data)[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= JSON.parse(@trivia_game.data)[index][0][-1]%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(@trivia_game.data)[index][0][-1]%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+    <div id="trashbin<%= JSON.parse(@trivia_game.data)[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
     </svg>
@@ -262,7 +262,7 @@ body {
 </form>
 </div>
 <script>
-  var counter = (document.getElementById("questionsrow").children.length-1)
+  var counter = (document.getElementById("questionsrow").children.length)
   var click = true;
   function create_mutiplechoice() {
     var mutiple_choice = document.createElement("div");
@@ -273,7 +273,7 @@ body {
     <div class="row">
     <div class="col-md-1 col-md-offset-11">
       <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
       </svg>
