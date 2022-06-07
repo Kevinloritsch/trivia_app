@@ -133,11 +133,8 @@ body {
     </div>
     </div>
 <% index = index +1 %>
-</div>
 <% end %>
 <% end %>
-</div>
-</div>
 <% else %>
 <div class="row">
 <div class="col-md-12">
@@ -262,7 +259,7 @@ body {
 </form>
 </div>
 <script>
-  var counter = (document.getElementById("questionsrow").children.length)
+  var counter = (document.getElementById("questionsrow").children.length-1)
   var click = true;
   function create_mutiplechoice() {
     var mutiple_choice = document.createElement("div");
