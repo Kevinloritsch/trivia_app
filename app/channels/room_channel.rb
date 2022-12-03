@@ -7,7 +7,7 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    ActionCable.server.broadcast("room_channel_nymxurgc", delete: User.find($remove_player.to_i).name)
+    ActionCable.server.broadcast("room_channel_#{params["room"].to_s}", delete: User.find($remove_player.to_i).name)
     players = Room.find_by(:session=>params["room"]).players.split(", ");
     players.delete($remove_player)
     # puts(players);

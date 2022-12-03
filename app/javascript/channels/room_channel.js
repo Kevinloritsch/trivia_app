@@ -12,6 +12,7 @@ document.addEventListener('turbolinks:load', ()=> {
       connected() {
         // Called when the subscription is ready for use on the server
         console.log("Connecting from room channel: "+ room_id.toString())
+        trivia = 0;
         if(document.getElementById("player") != null){
           player = document.getElementById("player").innerText.toString()
         }
@@ -44,6 +45,7 @@ document.addEventListener('turbolinks:load', ()=> {
               canvas.style = "width:100%;max-width:700px"
               document.getElementById("container").append(canvas)
               barGraph(players, JSON.parse(data.message)[0], JSON.parse(data.message)[1],trivia, JSON.parse(data.message)[2])
+              // trivia = 0;
           }
         }else if(data.player != undefined){
           var boolean = true;
@@ -66,6 +68,7 @@ document.addEventListener('turbolinks:load', ()=> {
             }
           }
         }else if(data.trivia_game != undefined){
+          console.log(data.trivia_game)
           for(var i = 0; i < JSON.parse(data.trivia_game).length; i++){
             if(JSON.parse(data.trivia_game)[i][0].includes("question")){
               trivia++;
@@ -78,6 +81,7 @@ document.addEventListener('turbolinks:load', ()=> {
             canvas.style = "width:100%;max-width:700px"
             document.getElementById("container").append(canvas)
             barGraph(players, null,null,trivia, null);
+            // trivia = 0;
           }else{
             var triv  = JSON.parse(data.trivia_game.toString())
             var buttons = [];

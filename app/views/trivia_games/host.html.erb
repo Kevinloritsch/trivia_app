@@ -29,6 +29,8 @@ body {
 <script>
 var right = 0;
 var wrong = 0;
+var old_correct = null;
+var times = 0;
 var yValues_correct = [];
 var yValues_incorrect = [];
 function barGraph(players, correct, incorrect,number_questions, client){
@@ -48,12 +50,19 @@ function barGraph(players, correct, incorrect,number_questions, client){
         for(var i = 0; i < xValues.length; i++){
             if(xValues[i] == client){
                 yValues_incorrect[i] = incorrect/3
-                yValues_correct[i] = correct - yValues_incorrect[i]
+                if(old_correct == correct){
+                    times++;
+                    yValues_correct[i] = correct+times - incorrect/3
+                }else{
+                    yValues_correct[i] = correct+times - incorrect/3
+                }
             }
+            break;
         }
     }
-    // console.log("Y correct:"+yValues_correct)
-    // console.log("Y incorrect:"+yValues_incorrect)
+    console.log("Correct: "+correct);
+    console.log("Incorrect: "+incorrect/3)
+    old_correct = correct;
 
     new Chart(document.getElementById("myChart"), {
         type: "bar",
@@ -98,7 +107,7 @@ function test_function(button, triv){
                     right++
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-success has-feedback form-group row")
                 }else{
-                    wrong+=3
+                    wrong= wrong + 3
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-error has-feedback form-group row")
                 }
                 setTimeout(function(){
@@ -112,7 +121,7 @@ function test_function(button, triv){
                         var container = document.getElementById("container")
                         container.innerHTML = '';
                         var correct = document.createElement("h2")
-                        correct.innerText = "Right: " + (right-(wrong*(1/3)))
+                        correct.innerText = "Right: " + (right)
                         var incorrect = document.createElement("h2")
                         incorrect.innerText = "Wrong: " + wrong*(1/3)
                         var row = document.createElement("div")
@@ -192,7 +201,8 @@ function test_function(button, triv){
                         var container = document.getElementById("container")
                         container.innerHTML = '';
                         var correct = document.createElement("h2")
-                        correct.innerText = "Right: " + (right-(wrong*(1/3)))
+                        correct.innerText = "Right: " + (right-(wrong/3))
+                        console.log(right);
                         var incorrect = document.createElement("h2")
                         incorrect.innerText = "Wrong: " + wrong*(1/3)
                         var row = document.createElement("div")
