@@ -31,6 +31,7 @@ function test_function(button, triv, roomChannel){
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-success has-feedback form-group row")
                 }else{
                     roomChannel.send({correct: "This user has gotten it incorrect"})
+                    right++
                     wrong = wrong +3;
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-error has-feedback form-group row")
                 }

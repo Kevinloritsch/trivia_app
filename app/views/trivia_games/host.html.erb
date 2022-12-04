@@ -48,21 +48,21 @@ function barGraph(players, correct, incorrect,number_questions, client){
 
     }else{
         for(var i = 0; i < xValues.length; i++){
-            if(xValues[i] == client){
+            console.log(xValues[i]);
+            if(xValues[i].toString() == client.toString()){
                 yValues_incorrect[i] = incorrect/3
-                if(old_correct == correct){
-                    times++;
-                    yValues_correct[i] = correct+times - incorrect/3
-                }else{
-                    yValues_correct[i] = correct+times - incorrect/3
-                }
+                yValues_correct[i] = correct - yValues_incorrect[i];
+                // if(old_correct == correct){
+                //     times++;
+                //     yValues_correct[i] = correct+times - incorrect/3
+                // }else{
+                //     yValues_correct[i] = correct+times - incorrect/3
+                // }
             }
-            break;
         }
     }
-    console.log("Correct: "+correct);
-    console.log("Incorrect: "+incorrect/3)
-    old_correct = correct;
+
+
 
     new Chart(document.getElementById("myChart"), {
         type: "bar",
@@ -107,6 +107,7 @@ function test_function(button, triv){
                     right++
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-success has-feedback form-group row")
                 }else{
+                    right++;
                     wrong= wrong + 3
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-error has-feedback form-group row")
                 }
@@ -260,7 +261,7 @@ function test_function(button, triv){
                             if(buttons[counter].value == 'true'){
                                 buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-success'),right++,test_function(this, triv)}
                             }else{
-                                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),wrong++}
+                                buttons[counter].onclick = function(){this.setAttribute('class', 'btn btn-danger'),wrong+=3, right++}
                             }
                             col.appendChild(buttons[counter])
                             if(counter < 2){

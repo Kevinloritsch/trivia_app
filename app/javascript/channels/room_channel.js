@@ -36,8 +36,10 @@ document.addEventListener('turbolinks:load', ()=> {
         }
         // Called when there's incoming data on the websocket for this channel
         if(data.message != undefined){
+
           // console.log("Incoming Data: " + data.message.toString())
             if(location.pathname.includes("host")){
+              console.log(data);
               document.getElementById("container").innerHTML = ""
               // console.log(typeof(data.message))
               var canvas = document.createElement("canvas");
