@@ -104,19 +104,20 @@ end
     end
     @x = is_blank(@everything)
     if(@x[0].class == Integer)
+      puts(@x[1][0])
       if(@x[1][0].include?("question"))
-        flash[:danger] = "Question "+ (@x[1][0][-1].to_i+1).to_s + " is not filled out!"
+        flash[:danger] = "Question "+ (@x[1][0][(@x[1][0].index("n")+1)..-1].to_i+1).to_s + " is not filled out!"
       elsif(@x[1][0].include?("frq"))
-        flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer is not filled out!"
+        flash[:danger] = "Question " + (@x[1][0][(@x[1][0].index("er")+2)..-1].to_i+1).to_s + "\tAnswer is not filled out!"
       else
         if(@x[1][0].include?("answera"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer A is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][(@x[1][0].index("ra")+2)..-1].to_i+1).to_s + "\tAnswer A is not filled out!"
         elsif(@x[1][0].include?("answerb"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer B is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][(@x[1][0].index("rb")+2)..-1].to_i+1).to_s + "\tAnswer B is not filled out!"
         elsif(@x[1][0].include?("answerc"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer C is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][(@x[1][0].index("rc")+2)..-1].to_i+1).to_s + "\tAnswer C is not filled out!"
         elsif(@x[1][0].include?("answerd"))
-          flash[:danger] = "Question " + (@x[1][0][-1].to_i+1).to_s + "\tAnswer D is not filled out!"
+          flash[:danger] = "Question " + (@x[1][0][(@x[1][0].index("rd")+2)..-1].to_i+1).to_s + "\tAnswer D is not filled out!"
         end
       end
       for key in @inputs.keys
@@ -128,8 +129,13 @@ end
     end
     @valid = check_answer_choice(@everything)
     if(@valid.class == Array)
-      question_number = (@valid[0][-1].to_i).to_s
-      flash[:danger] = "Question" + question_number + " does not have an answer!"
+        puts(@valid[0])
+        if(@valid[0].include?(","))
+          question_number = ((@valid[0][7..(@valid[0].index(",")-1)].to_i)+1).to_s
+        else
+          question_number = ((@valid[0][7..-1].to_i)+1).to_s
+        end
+        flash[:danger] = "Question " + question_number + " does not have an answer!"
       for key in @inputs.keys
         if(key.include?("id"))
           redirect_to edit_user_trivia_game_path(:everything => @everything.to_s, :id => params["id"].to_i, :user_id => params["user_id"],:title => params["title"]) and return;

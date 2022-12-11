@@ -11,15 +11,14 @@ if(isNaN(counter)){
 }
   var click = true;
   function create_mutiplechoice() {
-    counter++;
     var mutiple_choice = document.createElement("div");
-    mutiple_choice.id = `mutiplechoice${counter}`;
-    mutiple_choice.setAttribute("onmouseover",`document.getElementById("trashbin${counter}").style.display = 'block'`);
-    mutiple_choice.setAttribute("onmouseout",`document.getElementById("trashbin${counter}").style.display = 'none'`);
+    mutiple_choice.id = `mutiplechoice${counter+1}`;
+    mutiple_choice.setAttribute("onmouseover",`document.getElementById("trashbin${counter+1}").style.display = 'block'`);
+    mutiple_choice.setAttribute("onmouseout",`document.getElementById("trashbin${counter+1}").style.display = 'none'`);
     mutiple_choice.innerHTML = `
     <div class="row">
     <div class="col-md-1 col-md-offset-11">
-      <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
+      <div id="trashbin${counter+1}" onmouseover="document.getElementById('trashbin${counter+1}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter+1}').style.color = 'black'" style="display: none" onclick="destroy(this)">
       <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -32,7 +31,7 @@ if(isNaN(counter)){
   <div class="row">
     <div class="col-md-12">
       <label>Question</label>
-      <input name="question${counter}" type="text" class="form-control" placeholder="Question">
+      <input name="question${counter+1}" type="text" class="form-control" placeholder="Question">
     </div>
     </div>
     <div class="row" style="padding-bottom: 15px">
@@ -41,12 +40,12 @@ if(isNaN(counter)){
         <span class="input-group-btn">
         <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
         </span>
-        <input name="answera${counter}" type="text" class="form-control" placeholder="A.">
+        <input name="answera${counter+1}" type="text" class="form-control" placeholder="A.">
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group">
-        <input name="answerb${counter}" type="text" class="form-control" placeholder="B.">
+        <input name="answerb${counter+1}" type="text" class="form-control" placeholder="B.">
         <span class="input-group-btn">
         <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
         </span>
@@ -59,12 +58,12 @@ if(isNaN(counter)){
       <span class="input-group-btn">
       <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
       </span>
-      <input name="answerc${counter}" type="text" class="form-control" placeholder="C.">
+      <input name="answerc${counter+1}" type="text" class="form-control" placeholder="C.">
     </div>
   </div>
   <div class="col-md-6">
     <div class="input-group">
-      <input name="answerd${counter}" type="text" class="form-control" placeholder="D.">
+      <input name="answerd${counter+1}" type="text" class="form-control" placeholder="D.">
       <span class="input-group-btn">
         <button class="btn btn-default" onmouseover="highlight(this)" onmouseout="highlight(this)" onclick="highlight(this)" type="button">&nbsp&nbsp</button>
       </span>
@@ -75,18 +74,19 @@ if(isNaN(counter)){
     `
     var row = document.getElementById("questionsrow");
     row.appendChild(mutiple_choice);
+        counter++;
+
   }
   function create_frq(){
-    counter++;
     var frq = document.createElement("div");
-    frq.id = `frq${counter}`
-    frq.setAttribute("onmouseover",`document.getElementById("trashbin${counter}").style.display = 'block'`);
-    frq.setAttribute("onmouseout",`document.getElementById("trashbin${counter}").style.display = 'none'`);
+    frq.id = `frq${counter+1}`
+    frq.setAttribute("onmouseover",`document.getElementById("trashbin${counter+1}").style.display = 'block'`);
+    frq.setAttribute("onmouseout",`document.getElementById("trashbin${counter+1}").style.display = 'none'`);
     frq.innerHTML = 
     `
     <div class="row">
   <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin${counter}" onmouseover="document.getElementById('trashbin${counter}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter}').style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <div id="trashbin${counter+1}" onmouseover="document.getElementById('trashbin${counter+1}').style.color = 'orange'" onmouseout="document.getElementById('trashbin${counter+1}').style.color = 'black'" style="display: none" onclick="destroy(this)">
     <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -98,31 +98,36 @@ if(isNaN(counter)){
     <div class="row">
       <div class="col-md-6">
         <label>Question</label>
-        <input name="frqquestion${counter}" type="text" class="form-control" placeholder="Question">
+        <input name="frqquestion${counter+1}" type="text" class="form-control" placeholder="Question">
       </div>
       <div class="col-md-6">
         <label>Answer</label>
-        <input name="frqanswer${counter}" type="text" class="form-control" placeholder="Answer">
+        <input name="frqanswer${counter+1}" type="text" class="form-control" placeholder="Answer">
       </div>
     </div>`;
     var row = document.getElementById("questionsrow");
     row.appendChild(frq);
-    // frq_counter++;
+    counter++;
   }
   function destroy(node){
     var parent = node;
-    var this_index = parseInt(parent.parentElement.parentElement.parentElement.id[parent.parentElement.parentElement.parentElement.id.length-1])
+    var this_index = parseInt(parent.parentElement.parentElement.parentElement.id.substring(13))
+    if(isNaN(this_index)){
+      this_index = parseInt(parent.parentElement.parentElement.parentElement.id.substring(3))
+    }
+    console.log(this_index)
     var container = node.parentElement.parentElement.parentElement.parentElement;
     for(var i = 0; i < container.children.length; i++){
       if(container.children[i].id.includes("mutiplechoice")){
         if(i > this_index){
-          var new_index = container.children[i].id[container.children[i].id.length-1]-1
+          // console.log(container.children[i].id.substring(13)-1)
+          var new_index = container.children[i].id.substring(13)-1
           container.children[i].children[1].children[0].children[1].setAttribute("name", `question${new_index}`)
           container.children[i].children[2].children[0].children[0].children[1].setAttribute('name', `answera${new_index}`)
           container.children[i].children[2].children[1].children[0].children[0].setAttribute('name', `answerb${new_index}`)
           container.children[i].children[3].children[0].children[0].children[1].setAttribute('name', `answerc${new_index}`)
           container.children[i].children[3].children[1].children[0].children[0].setAttribute('name', `answerd${new_index}`)
-          container.children[i].id = container.children[i].id.substring(0,container.children[i].id.length-1)+(new_index).toString()
+          container.children[i].id = container.children[i].id.substring(0,13)+(new_index).toString()
           var trashbin = document.getElementById(`trashbin${(new_index+1).toString()}`)
           if(new_index == 0){
             new_index = ""
@@ -135,7 +140,7 @@ if(isNaN(counter)){
         }
       }else if(container.children[i].id.includes("frq")){
         if(i > this_index){
-          var new_index = parseInt(container.children[i].id[container.children[i].id.length-1])-1
+          var new_index = parseInt(container.children[i].id.substring(3))-1
           container.children[i].id = `frq${new_index}`
           var question = document.getElementsByName(`frqquestion${(parseInt(new_index)+1).toString()}`)[0]
           question.setAttribute("name", `frqquestion${new_index}`)
@@ -317,10 +322,10 @@ if(isNaN(counter)){
 </div>
   <% for index in 0..(JSON.parse(params["everything"]).length-1) %>
     <% if JSON.parse(params["everything"])[index][0].include?("question") and !JSON.parse(params["everything"])[index][0].include?("frq") %>
-<div id="mutiplechoice<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'none'">
+<div id="mutiplechoice<%= JSON.parse(params["everything"])[index][0][8..-1]%>" onmouseover="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][8..-1]%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][8..-1]%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <div id="trashbin<%= JSON.parse(params["everything"])[index][0][8..-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
     <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -331,7 +336,7 @@ if(isNaN(counter)){
   <div class="row">
     <div class="col-md-12">
       <label>Question</label>
-      <input name="question<%= JSON.parse(params["everything"])[index][0][-1]%>" type="text" class="form-control" placeholder="Question" value="<%= JSON.parse(params["everything"])[index][1].to_s %>">
+      <input name="question<%= JSON.parse(params["everything"])[index][0][8..-1]%>" type="text" class="form-control" placeholder="Question" value="<%= JSON.parse(params["everything"])[index][1].to_s %>">
     </div>
     </div>
     <div class="row" style="padding-bottom: 15px">
@@ -389,11 +394,10 @@ if(isNaN(counter)){
 </div>
 <% index = index + 4 %>
     <% elsif JSON.parse(params["everything"])[index][0].include?("frqquestion") %>
-    <div class="container">
-<div id="frq<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][-1]%>').style.display = 'none'">
+<div id="frq<%= JSON.parse(params["everything"])[index][0][11..-1]%>" onmouseover="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][11..-1]%>').style.display = 'block'" onmouseout="document.getElementById('trashbin<%= JSON.parse(params['everything'])[index][0][11..-1]%>').style.display = 'none'">
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
-    <div id="trashbin<%= JSON.parse(params["everything"])[index][0][-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
+    <div id="trashbin<%= JSON.parse(params["everything"])[index][0][11..-1]%>" onmouseover="this.style.color = 'orange'" onmouseout="this.style.color = 'black'" style="display: none" onclick="destroy(this)">
     <svg xmlns="http://www.w3.org/2000/svg" style="width: 2em; height: 2em;" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -413,7 +417,6 @@ if(isNaN(counter)){
     </div>
       </div>
       <% index = index +1 %>
-      </div>
     <% end %>
   <% end %>
   </div>
