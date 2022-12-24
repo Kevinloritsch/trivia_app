@@ -1,5 +1,6 @@
-<p id="client" style="display: hidden"><%= User.find(params["current_user"].to_i).name %></p>
+<p id="client" style="display: none"><%= User.find(params["current_user"].to_i).name %></p>
 <div id="container">
+<div class="row">
 <div id="container1">
 <h2>Host <%= User.find_by(:email=>Room.find_by(:session=>params["gamesession"]).author).name%></h2>
 <p id="gamesession" style="display: none"><%=params[:gamesession]%></p>
@@ -12,13 +13,23 @@
 <% end %>
 </div>
 </div>
-<p id="player" style="display: hidden"><%= params["current_user"] %></p>
+</div>
+<p id="player" style="display: none"><%= params["current_user"] %></p>
 </div>
 <script>
+var int = setInterval(display, 1000);
+function display(){
+    try{
+        var seconds = parseInt(document.getElementById("timer").innerText);
+        seconds++;
+        document.getElementById("timer").innerText = seconds;
+    }catch(error){
+        
+    }
+}
 var right = 0;
 var wrong = 0;
 function test_function(button, triv, roomChannel){
-    // roomChannel.send({message: "Deez nuts"})
     var index = button.parentElement.parentElement.parentElement.children[0].children[0].id
     var container = button.parentElement.parentElement.parentElement;
     for(var i = 0; i < triv.length; i++){
@@ -36,7 +47,7 @@ function test_function(button, triv, roomChannel){
                     document.getElementsByClassName("row")[1].setAttribute("class", "has-error has-feedback form-group row")
                 }
                 setTimeout(function(){
-                    document.getElementById("container").innerHTML = '';
+
                     var row = [];
                     row[0] = document.createElement("div")
                     row[0].className = "form-group row"
@@ -66,7 +77,10 @@ function test_function(button, triv, roomChannel){
                         var html = 
                         `
                         <div class="row">
-                        <h2 id="${triv[i+2][0]}">${triv[i+2][1]}</h2>
+                        <h2 class="col" id="${triv[i+2][0]}">${triv[i+2][1]}</h2>
+                        <div class="col-md-1 col-md-offset-11" style="height: 100px; width: 100px; background-color: #bbb; border-radius: 50%; display: inline-block; text-align: center; justify-content: center;align-items: center;">
+                        <p id="timer" style="line-height: 100px; ">0</p>
+                        </div> 
                         </div>`
                         var col = document.createElement("div")
                         col.className = "col-md-1 col-md-offset-11";
@@ -109,7 +123,10 @@ function test_function(button, triv, roomChannel){
                         }
                         var html = `
                         <div class="row">
-                        <h2 id="${triv[i+2][0]}">${triv[i+2][1]}</h2>
+                        <h2 class = "col" id="${triv[i+2][0]}">${triv[i+2][1]}</h2>
+                        <div class="col-md-1 col-md-offset-11" style="height: 100px; width: 100px; background-color: #bbb; border-radius: 50%; display: inline-block; text-align: center; justify-content: center;align-items: center;">
+                        <p id="timer" style="line-height: 100px; ">0</p>
+                        </div> 
                         </div>`
 
                         document.getElementById("container").innerHTML = html;
@@ -153,7 +170,10 @@ function test_function(button, triv, roomChannel){
                         var html = 
                         `
                         <div class="row">
-                        <h2 id="${triv[i+5][0]}">${triv[i+5][1]}</h2>
+                        <h2 class="col "id="${triv[i+5][0]}">${triv[i+5][1]}</h2>
+                        <div class="col-md-1 col-md-offset-11" style="height: 100px; width: 100px; background-color: #bbb; border-radius: 50%; display: inline-block; text-align: center; justify-content: center;align-items: center;">
+                        <p id="timer" style="line-height: 100px; ">0</p>
+                        </div> 
                         </div>`
                         var col = document.createElement("div")
                         col.className = "col-md-1 col-md-offset-11";
@@ -197,7 +217,10 @@ function test_function(button, triv, roomChannel){
                         }
                         var html = `
                         <div class="row">
-                        <h2 id="${triv[i+5][0]}">${triv[i+5][1]}</h2>
+                        <h2 class="col" id="${triv[i+5][0]}">${triv[i+5][1]}</h2>
+                        <div class="col-md-1 col-md-offset-11" style="height: 100px; width: 100px; background-color: #bbb; border-radius: 50%; display: inline-block; text-align: center; justify-content: center;align-items: center;">
+                        <p id="timer" style="line-height: 100px;">0</p>
+                        </div> 
                         </div>`
 
                         document.getElementById("container").innerHTML = html;

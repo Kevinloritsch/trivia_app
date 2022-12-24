@@ -139,7 +139,9 @@ document.addEventListener('turbolinks:load', ()=> {
               var html = 
               `
               <div class="row">
-              <h2 id="${triv[0][0]}">${triv[0][1]}</h2>
+              <h2 class = "col" id="${triv[0][0]}">${triv[0][1]}</h2>
+              <div class="col-md-1 col-md-offset-11" style="height: 100px; width: 100px; background-color: #bbb; border-radius: 50%; display: inline-block; text-align: center; justify-content: center;align-items: center;"><p id="timer" style="line-height: 100px; ">0</p></div>
+              </div>
               </div>`
 
                 document.getElementById("container").innerHTML = html;
