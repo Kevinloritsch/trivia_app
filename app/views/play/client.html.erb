@@ -18,13 +18,25 @@
 </div>
 <script>
 var int = setInterval(display, 1000);
+var seconds;
+let seconds_array = [];
 function display(){
     try{
-        var seconds = parseInt(document.getElementById("timer").innerText);
+        if(parseInt(document.getElementById("timer").innerText)== 0){
+            if(!(seconds === undefined)){
+                seconds_array.push(seconds);
+                console.log(seconds_array);
+            }
+        }
+        seconds = parseInt(document.getElementById("timer").innerText);
         seconds++;
         document.getElementById("timer").innerText = seconds;
     }catch(error){
-        
+        if(!(seconds === undefined)){
+                seconds_array.push(seconds);
+                console.log(seconds_array);
+                clearInterval(int);
+            }
     }
 }
 var right = 0;
@@ -232,6 +244,6 @@ function test_function(button, triv, roomChannel){
             }
         }
     }
-    roomChannel.send({message: [right, wrong,document.getElementById("client").innerText]})
+    roomChannel.send({message: [right, wrong,document.getElementById("client").innerText,seconds_array]})
 }
 </script>
